@@ -21,13 +21,11 @@ public class User {
 	private String lastName;
 	private String login;
 	private String logo;
+	private boolean admin;
 
 	@OneToOne
 	@JoinColumn(name = "idAddress")
 	private Address address;
-
-	@OneToOne(mappedBy = "user")
-	private Role role;
 
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders = new ArrayList<Order>();
@@ -72,20 +70,20 @@ public class User {
 		this.logo = logo;
 	}
 
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 	public Address getAddress() {
 		return address;
 	}
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
 	}
 
 	public List<Order> getOrders() {
@@ -99,7 +97,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", firstName=" + firstName + ", lastName=" + lastName + ", login=" + login
-				+ ", logo=" + logo + ", address=" + address + ", role=" + role + ", orders=" + orders + "]";
+				+ ", logo=" + logo + ", admin=" + admin + ", address=" + address + ", orders=" + orders + "]";
 	}
 
 }
