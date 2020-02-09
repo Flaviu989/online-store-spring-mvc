@@ -1,11 +1,11 @@
-#SDA Online Store - Spring MVC
+# SDA Online Store - Spring MVC
 
-###Description
+## Description
 An application that allows adding products to he store through the administration pannel.
 Users are able to register and login as well as placing an order by the user.
 
-###Functionality
-##Main functions
+## Functionality
+### Main functions
 Login panel.
 * **Admin**: 
 	* *Adding categories for products*
