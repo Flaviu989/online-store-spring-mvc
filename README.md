@@ -3,10 +3,11 @@
 ## Description
 An application that allows adding products to he store through the administration pannel.
 Users are able to register and login as well as placing an order by the user.
+[Application UML](https://gitlab.com/Flaviu989/online-store-spring-mvc/-/raw/master/JDL-Studio%20UML.png)
 
 ## Functionality
 ### Main functions
-Login panel.
+* **Login panel**
 * **Admin**: 
 	* *Adding categories for products*
 		* category name
