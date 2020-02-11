@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Welcome to our store!</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/welcome.css}"/>
+	</head>
+	<body>
+		<main id="main">
+			<header id="header">
+                <nav id="nav">
+                	<div id="menu_container">
+                		<ul>
+	                    	<li th:each="category: ${mainCategory}">
+	                        	<span th:text="${category.name}"></span>
+	                        	<ul th:if="${#lists.size(category.subCategories)} != 0">
+		                        	<li th:each="subCategory: ${category.subCategories}">
+		                        		<div th:if="${#lists.size(subCategory.subCategories)} == 0" id="btn" th:onclick="'location.href=' + 'http://localhost:8080/list/' + ${subCategory.idCategory}">
+		                        			<span th:text="${subCategory.name}"></span>
+		                        		</div>
+		                        		<span th:if="${#lists.size(subCategory.subCategories)} != 0" th:text="${subCategory.name}"></span>
+			                        	<ul th:if="${#lists.size(subCategory.subCategories)} != 0">
+				                        	<li th:each="subSubCategory: ${subCategory.subCategories}">
+				                        		<div id="btn" onclick="location.href=''">
+				                        			<span th:text="${subSubCategory.name}"></</span>
+				                        		</div>
+				                        	</li>
+			                        	</ul>
+		                        	</li>
+		                        </ul>
+	                        </li> 
+	                    </ul>    
+                	</div>
+                </nav> 
+            </header>
+		</main>
+		<script th:src="@{/js/welcome.js}" type=""></script>
+	</body>
+</html>
