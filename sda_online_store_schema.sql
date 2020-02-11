@@ -60,7 +60,7 @@ CREATE TABLE `category` (
   `id_super_category` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_category`),
   KEY `FKt5oyo65617kfismdk9yh77v7s` (`id_super_category`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +69,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'TV, Audio-Video & Photo',NULL),(2,'Laptops, Tablets & Phones',NULL),(3,'PC, Peripherals & Software',NULL),(4,'Home Appliances',NULL),(5,'Gaming',NULL),(6,'Books',NULL),(7,'Televisions',1),(8,'TV Accessorys',1),(9,'Audio',1),(10,'Laptops',2),(11,'Laptop Accessorys',2),(12,'Tablets',2),(13,'Phones',2),(14,'Desktop PCs',3),(15,'Screens',3),(16,'Peripherals',3),(17,'PC Components',3),(18,'Consoles',5),(19,'PC gaming',5),(20,'Games',5),(21,'Fiction',6),(22,'Psychology',6),(23,'History',6),(24,'IT',6),(25,'HD & Full HD',7),(26,'4K Ultra HD',7),(27,'Cables and Adapters',8),(28,'Soundbar',9),(29,'Home Cinema',9),(30,'Asus',10),(31,'Apple',10),(32,'HP',10),(33,'Acer',10),(34,'External HDD',11),(35,'Apple',12),(36,'Huawai',12),(37,'Samsung',12),(38,'Apple',13),(39,'Huawai',13),(40,'Samsung',13),(41,'Mouses',16),(42,'Keyboards',16),(43,'Motherboard',17),(44,'Video Card',17),(45,'Xbox',18),(46,'Playstation',18),(47,'Gaming Desktop',19),(48,'Gaming Laptop',19),(49,'Xbox Games',20),(50,'Playstation Games',20),(51,'PC Games',20),(52,'Refrigerators',4),(53,'Stoves',4),(54,'Washing Machines',4),(55,'Air-conditioning devices',4);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-09 10:18:23
+-- Dump completed on 2020-02-11 18:50:48
