@@ -1,11 +1,12 @@
 package com.sda.store.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Supplier {
@@ -16,9 +17,8 @@ public class Supplier {
 	private String name;
 	private String logo;
 
-	@OneToOne
-	@JoinColumn(name = "idProduct")
-	private Product product;
+	@OneToMany(mappedBy = "supplier")
+	private List<Product> products;
 
 	public int getIdSupplier() {
 		return idSupplier;
@@ -44,17 +44,17 @@ public class Supplier {
 		this.logo = logo;
 	}
 
-	public Product getProduct() {
-		return product;
+	public List<Product> getProducts() {
+		return products;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 	@Override
 	public String toString() {
-		return "Supplier [idSupplier=" + idSupplier + ", name=" + name + ", logo=" + logo + ", product=" + product
+		return "Supplier [idSupplier=" + idSupplier + ", name=" + name + ", logo=" + logo + ", products=" + products
 				+ "]";
 	}
 

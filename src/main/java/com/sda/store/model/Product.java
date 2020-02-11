@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Product {
@@ -23,7 +22,7 @@ public class Product {
 	@JoinColumn(name = "idCategory")
 	private Category category;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idSupplier")
 	private Supplier supplier;
 
