@@ -149,7 +149,7 @@ CREATE TABLE `product` (
   PRIMARY KEY (`id_product`),
   KEY `FK5cxv31vuhc7v32omftlxa8k3c` (`id_category`),
   KEY `FK7vecnfptx4ologqg55y3v7mbm` (`id_supplier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,6 +158,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,'Televizor Smart LED Star-Light, 81 cm, 32DM6600, HD',549,'Televizor LED Smart Star-Light','1',25,NULL),(2,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','2',25,NULL),(3,'Televizor LED Smart LG, 108 cm, 43UM7100PLB, 4K Ultra HD',1499.99,'Televizor LED Smart LG','3',25,NULL),(4,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','1',26,NULL),(5,'Televizor LED Smart Philips, 126 cm, 50PUS6804/12, 4K Ultra HD',2199.99,'Televizor LED Smart Philips','2',26,NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,10 +197,8 @@ CREATE TABLE `supplier` (
   `id_supplier` int(11) NOT NULL AUTO_INCREMENT,
   `logo` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `id_product` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_supplier`),
-  KEY `FKgq2w2viukx80775mpcun160pm` (`id_product`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id_supplier`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,6 +207,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
+INSERT INTO `supplier` VALUES (1,NULL,'Altex'),(2,NULL,'Media Galaxy'),(3,NULL,'Flanco');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-11 18:50:48
+-- Dump completed on 2020-02-11 22:15:13
