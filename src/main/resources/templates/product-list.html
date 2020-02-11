@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<tabel>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Desciption</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product: ${products}">
+					<td th:text="${product.name}"></th>
+					<td th:text="${product.description}"></th>
+				</tr>
+			</tbody>
+			
+		
+		</tabel>
+	
+	</body>
+</html>
