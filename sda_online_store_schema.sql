@@ -69,7 +69,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'TV, Audio-Video & Photo',NULL),(2,'Laptops, Tablets & Phones',NULL),(3,'PC, Peripherals & Software',NULL),(4,'Home Appliances',NULL),(5,'Gaming',NULL),(6,'Books',NULL),(7,'Televisions',1),(8,'TV Accessorys',1),(9,'Audio',1),(10,'Laptops',2),(11,'Laptop Accessorys',2),(12,'Tablets',2),(13,'Phones',2),(14,'Desktop PCs',3),(15,'Screens',3),(16,'Peripherals',3),(17,'PC Components',3),(18,'Consoles',5),(19,'PC gaming',5),(20,'Games',5),(21,'Fiction',6),(22,'Psychology',6),(23,'History',6),(24,'IT',6),(25,'HD & Full HD',7),(26,'4K Ultra HD',7),(27,'Cables and Adapters',8),(28,'Soundbar',9),(29,'Home Cinema',9),(30,'Asus',10),(31,'Apple',10),(32,'HP',10),(33,'Acer',10),(34,'External HDD',11),(35,'Apple',12),(36,'Huawai',12),(37,'Samsung',12),(38,'Apple',13),(39,'Huawai',13),(40,'Samsung',13),(41,'Mouses',16),(42,'Keyboards',16),(43,'Motherboard',17),(44,'Video Card',17),(45,'Xbox',18),(46,'Playstation',18),(47,'Gaming Desktop',19),(48,'Gaming Laptop',19),(49,'Xbox Games',20),(50,'Playstation Games',20),(51,'PC Games',20),(52,'Refrigerators',4),(53,'Stoves',4),(54,'Washing Machines',4),(55,'Air-conditioning devices',4);
+INSERT INTO `category` VALUES (1,'TV, Audio-Video & Photo',NULL),(2,'Laptops, Tablets & Phones',NULL),(3,'PC, Peripherals & Software',NULL),(4,'Home Appliances',NULL),(5,'Gaming',NULL),(6,'Books',NULL),(7,'Televisions',1),(8,'TV Accessorys',1),(9,'Audio',1),(10,'Laptops',2),(11,'Laptop Accessorys',2),(12,'Tablets',2),(13,'Phones',2),(14,'Desktop PCs',3),(15,'Screens',3),(16,'Peripherals',3),(17,'PC Components',3),(18,'Consoles',5),(19,'PC gaming',5),(20,'Games',5),(21,'Fiction',6),(22,'Psychology',6),(23,'History',6),(24,'IT',6),(25,'HD & Full HD TVs',7),(26,'4K Ultra HD TVs',7),(27,'Cables and Adapters',8),(28,'Soundbars',9),(29,'Home Cinemas',9),(30,'Asus',10),(31,'Apple',10),(32,'HP',10),(33,'Acer',10),(34,'External HDDs',11),(35,'Apple',12),(36,'Huawai',12),(37,'Samsung',12),(38,'Apple',13),(39,'Huawai',13),(40,'Samsung',13),(41,'Mouses',16),(42,'Keyboards',16),(43,'Motherboards',17),(44,'Video Cards',17),(45,'Xboxs',18),(46,'Playstations',18),(47,'Gaming Desktops',19),(48,'Gaming Laptops',19),(49,'Xbox Games',20),(50,'Playstation Games',20),(51,'PC Games',20),(52,'Refrigerators',4),(53,'Stoves',4),(54,'Washing Machines',4),(55,'Air-conditioning devices',4);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,6 +146,7 @@ CREATE TABLE `product` (
   `thumbnail` varchar(255) DEFAULT NULL,
   `id_category` int(11) DEFAULT NULL,
   `id_supplier` int(11) DEFAULT NULL,
+  `date_added` date DEFAULT NULL,
   PRIMARY KEY (`id_product`),
   KEY `FK5cxv31vuhc7v32omftlxa8k3c` (`id_category`),
   KEY `FK7vecnfptx4ologqg55y3v7mbm` (`id_supplier`)
@@ -158,7 +159,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Televizor Smart LED Star-Light, 81 cm, 32DM6600, HD',549,'Televizor LED Smart Star-Light','1',25,NULL),(2,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','2',25,NULL),(3,'Televizor LED Smart LG, 108 cm, 43UM7100PLB, 4K Ultra HD',1499.99,'Televizor LED Smart LG','3',25,NULL),(4,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','1',26,NULL),(5,'Televizor LED Smart Philips, 126 cm, 50PUS6804/12, 4K Ultra HD',2199.99,'Televizor LED Smart Philips','2',26,NULL);
+INSERT INTO `product` VALUES (1,'Televizor Smart LED Star-Light, 81 cm, 32DM6600, HD',549,'Televizor LED Smart Star-Light','Televizor LED Smart Star-Light',25,1,'2020-02-13'),(2,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','Televizor LED Smart Samsung',25,2,'2020-02-13'),(3,'Televizor LED Smart LG, 108 cm, 43UM7100PLB, 4K Ultra HD',1499.99,'Televizor LED Smart LG','Televizor LED Smart LG',25,3,'2020-02-13'),(4,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','Televizor LED Smart Samsung 4k',26,2,'2020-02-14'),(5,'Televizor LED Smart Philips, 126 cm, 50PUS6804/12, 4K Ultra HD',2199.99,'Televizor LED Smart Philips','Televizor LED Smart Philips 4k',26,4,'2020-02-14');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +199,7 @@ CREATE TABLE `supplier` (
   `logo` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_supplier`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +208,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES (1,NULL,'Altex'),(2,NULL,'Media Galaxy'),(3,NULL,'Flanco');
+INSERT INTO `supplier` VALUES (1,NULL,'Star-Light'),(2,NULL,'Samsung'),(3,NULL,'LG'),(4,NULL,'Philips');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-11 22:15:13
+-- Dump completed on 2020-02-16 19:26:34
