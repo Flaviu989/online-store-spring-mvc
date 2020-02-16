@@ -23,9 +23,31 @@ public class ProductController {
 
 	@GetMapping("/list/{id}")
 	public String displayProductsFrom(Model model, @PathVariable("id") int id) {
-		List<Product> productList = productService.findProductByCategory(id);
+		List<Product> productList = productService.findProductByCategoryId(id);
+		String categoryName = categoryService.findCategoryById(id);
 		model.addAttribute("products", productList);
+		model.addAttribute("categoryName", categoryName);
 		return "product-list";
+	}
+
+	@GetMapping("/product/{id}")
+	public String displayProductDetails(Model model, @PathVariable("id") int id) {
+		Product product = productService.findProductByIdProduct(id);
+		String price = displayPrice(product);
+		String decimalPrice = String.valueOf((int) ((product.getItemPrice() - (int) product.getItemPrice()) * 100));
+		model.addAttribute("product", product);
+		model.addAttribute("price", price);
+		model.addAttribute("decimalPrice", decimalPrice);
+		return "product";
+	}
+
+	private String displayPrice(Product product) {
+		int intPrice = (int) product.getItemPrice();
+		String price;
+		if (intPrice % 1000 == 0)
+			return String.valueOf(((double) intPrice / 1000));
+		else
+			return String.valueOf(intPrice);
 	}
 
 }

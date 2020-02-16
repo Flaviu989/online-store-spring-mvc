@@ -6,6 +6,7 @@ import com.sda.store.model.Product;
 
 public interface ProductService {
 
-	List<Product> findProductByCategory(int id);
+	Product findProductByIdProduct(int id);
+	List<Product> findProductByCategoryId(int id);
 
 }

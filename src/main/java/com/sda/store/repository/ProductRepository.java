@@ -10,6 +10,8 @@ import com.sda.store.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
+	Product findByIdProduct(int id);
+
 	List<Product> findByCategoryIdCategory(int id);
 
 }

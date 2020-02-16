@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${product.name}"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/product.css}"/>
+	</head>
+	<body th:object="${product}">
+		<main id="main">
+			<div id="content">
+				<table id="content_table">
+					<tr> 
+						<td  colspan="2">
+							<img th:id="*{thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=*{thumbnail})}" th:alt="*{thumbnail}">
+							<img th:unless="*{thumbnail} != null" th:src="@{/images/product_thumbnail/default.jpg}" alt="Default image">
+						</td>
+					</tr>
+					<tr>
+						<td th:text="*{name}"></td>
+						<td>
+							<div id="price">
+								<span th:text="${price}"></span>
+								<sup th:text="${decimalPrice}">
+								</sup><span> Lei</span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" th:text="|Description: *{description}|"></td>
+					</tr>
+					<!-- <tr>
+						<td colspan="2" th:text="|Supplied by: *{supplier}|"></td>
+					</tr> -->
+				</table>
+			</div>
+		</main>
+		
+	</body>
+</html>
