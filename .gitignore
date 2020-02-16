@@ -4,6 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 src/main/resources/application.properties
+src/main/resources/static/images/*
 .mvn
 mvnw
 mvnw.cmd
