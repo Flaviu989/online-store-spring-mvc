@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+/* style reset */
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+* { 
+	margin: 0;
+	padding: 0;
+}
+/* end style reset */
+
+/* general CSS */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#main {
+	background-color: #5C5C5C;
+	height: 100%; 
+	width: 100%;
+}
+/* end general CSS */
+
+/* content CSS */
+table {
+	background-color: white;
+}
+
+#price span, sup {
+	color: red;
+}
+/* end content CSS */
