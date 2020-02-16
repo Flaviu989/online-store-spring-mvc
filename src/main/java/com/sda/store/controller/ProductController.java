@@ -1,8 +1,11 @@
 package com.sda.store.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +24,76 @@ public class ProductController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@GetMapping("/list/{id}")
-	public String displayProductsFrom(Model model, @PathVariable("id") int id) {
-		List<Product> productList = productService.findProductByCategoryId(id);
-		String categoryName = categoryService.findCategoryById(id);
-		model.addAttribute("products", productList);
+	@GetMapping("/list/{id}/{orderBy}/{page}")
+	public String displayProductsFrom(Model model, @PathVariable("id") int id, @PathVariable("orderBy") String orderBy,
+			@PathVariable("page") int pageNumber) {
+		int pageSize = 3;
+		Pageable pg = getAppropritatePageable(orderBy, pageNumber, pageSize);
+		Page<Product> productList = getAppropriateList(id, pg);
+		String categoryName = getCategoryName(id);
+		String orderOfList = getOrderOfListTitle(orderBy);
+
+		int nextPage = pageNumber + 1;
+		int previousPage = pageNumber - 1;
+		int totalPages = productList.getTotalPages();
+		boolean hasNextPage = (nextPage < totalPages);
+		boolean hasPreviousPage = (previousPage > -1);
+
+		model.addAttribute("products", productList.getContent());
 		model.addAttribute("categoryName", categoryName);
+		model.addAttribute("listId", id);
+		model.addAttribute("orderBy", orderBy);
+		model.addAttribute("orderOfList", orderOfList);
+		model.addAttribute("nextPage", nextPage);
+		model.addAttribute("previousPage", previousPage);
+		model.addAttribute("hasNextPage", hasNextPage);
+		model.addAttribute("hasPreviousPage", hasPreviousPage);
 		return "product-list";
+	}
+
+	private Pageable getAppropritatePageable(String orderBy, int pageNumber, int pageSize) {
+		Pageable pg;
+		switch (orderBy) {
+		case "nameOrder":
+			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("name")));
+		case "dateOrderAsc":
+			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("dateAdded"), Order.asc("name")));
+		case "dateOrderDesc":
+			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.desc("dateAdded"), Order.asc("name")));
+		default:
+			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("name")));
+		}
+	}
+
+	private Page<Product> getAppropriateList(int id, Pageable pg) {
+		Page<Product> productList;
+		if (id == 0)
+			return productList = productService.findAllProducts(pg);
+		else
+			return productList = productService.findProductByCategoryId(pg, id);
+	}
+
+	private String getCategoryName(int id) {
+		String categoryName;
+		if (id == 0) {
+			categoryName = "All products";
+		} else
+			categoryName = categoryService.findCategoryById(id);
+		return categoryName;
+	}
+
+	private String getOrderOfListTitle(String orderBy) {
+		String orderOfList;
+		switch (orderBy) {
+		case "nameOrder":
+			return "Name";
+		case "dateOrderAsc":
+			return "Old -> New";
+		case "dateOrderDesc":
+			return "New -> Old";
+		default:
+			return "None";
+		}
 	}
 
 	@GetMapping("/product/{id}")

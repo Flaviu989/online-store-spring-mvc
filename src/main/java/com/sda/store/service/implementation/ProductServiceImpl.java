@@ -1,8 +1,8 @@
 package com.sda.store.service.implementation;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sda.store.model.Product;
@@ -20,9 +20,13 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByIdProduct(id);
 	}
 
+	public Page<Product> findAllProducts(Pageable pageable) {
+		return productRepository.findAll(pageable);
+	}
+
 	@Override
-	public List<Product> findProductByCategoryId(int id) {
-		return productRepository.findByCategoryIdCategory(id);
+	public Page<Product> findProductByCategoryId(Pageable pageable, int id) {
+		return productRepository.findByCategoryIdCategory(id, pageable);
 	}
 
 }

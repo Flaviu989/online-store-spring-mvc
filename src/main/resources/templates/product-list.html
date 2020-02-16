@@ -11,11 +11,31 @@
 					<table id="content_table">
 					<thead>
 						<tr>
+							<th></th>
 							<th colspan="3" th:text="${categoryName}"></th>
+						</tr>
+						<tr>
+							<th></th>
+							<th th:text="'Order by: '"></th>
+							<th>
+								<select name="order" onchange="location = this.value;">
+									<option selected disabled hidden><p th:text=${orderOfList}></p></option>
+									<option th:value="|http://localhost:8080/list/${listId}/nameOrder/0|">Name</option>
+									<option th:value="|http://localhost:8080/list/${listId}/dateOrderAsc/0|">Date (oldest)</option>
+									<option th:value="|http://localhost:8080/list/${listId}/dateOrderDesc/0|">Date (newest)</option>
+								</select>
+							</th>
+							<th></th>
+						</tr>
+						<tr th:unless="${hasPreviousPage} != true and ${hasNextPage} != true">
+							<th></th>
+							<th colspan="2"><a th:if="${hasPreviousPage} == true" th:href="${previousPage}">Previous page</a></th>
+							<th><a th:if="${hasNextPage} == true" th:href="|/list/${listId}/${orderBy}/${nextPage}|">Next page</a></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="product: ${products}">
+							<th></th>
 							<td>
 								<a class="btn_img" th:href="|/product/${product.idProduct}|">
 									<img th:id="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=${product.thumbnail})}" th:alt="${product.thumbnail}">
