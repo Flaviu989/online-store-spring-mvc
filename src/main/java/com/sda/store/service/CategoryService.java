@@ -7,5 +7,6 @@ import com.sda.store.model.Category;
 public interface CategoryService {
 
 	List<Category> findMainCategories();
+	String findCategoryById(int id);
 
 }

@@ -10,6 +10,8 @@ import com.sda.store.model.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
+	Category findByIdCategory(int id);
+
 //	find main categories
 	List<Category> findBySuperCategoryNull();
 

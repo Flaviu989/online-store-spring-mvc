@@ -19,4 +19,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> findMainCategories() {
 		return categoryRepository.findBySuperCategoryNull();
 	}
+
+	@Override
+	public String findCategoryById(int id) {
+		return categoryRepository.findByIdCategory(id).getName();
+	}
 }

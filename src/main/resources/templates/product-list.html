@@ -2,23 +2,32 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title th:text="${categoryName}"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/product-list.css}"/>
 	</head>
 	<body>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Desciption</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="product: ${products}">
-					<td th:text="${product.name}"></th>
-					<td th:text="${product.description}"></th>
-				</tr>
-			</tbody>
-		</table>
-	
+		<main id="main">
+			<div id="content">
+					<table id="content_table">
+					<thead>
+						<tr>
+							<th colspan="3" th:text="${categoryName}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product: ${products}">
+							<td>
+								<a class="btn_img" th:href="|/product/${product.idProduct}|">
+									<img th:id="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=${product.thumbnail})}" th:alt="${product.thumbnail}">
+									<img th:unless="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/default.jpg}" alt="Default image">
+								</a>
+							</td>
+							<td th:text="${product.name}"></td>
+							<td><a class="btn" th:href="|/product/${product.idProduct}|">See details</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
 	</body>
 </html>
