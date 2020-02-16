@@ -1,5 +1,7 @@
 package com.sda.store.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,7 @@ public class Product {
 	private String description;
 	private String thumbnail;
 	private double itemPrice;
+	private LocalDate dateAdded;
 
 	@ManyToOne
 	@JoinColumn(name = "idCategory")
@@ -66,6 +69,14 @@ public class Product {
 		this.itemPrice = itemPrice;
 	}
 
+	public LocalDate getDateAdded() {
+		return dateAdded;
+	}
+
+	public void setDateAdded(LocalDate dateAdded) {
+		this.dateAdded = dateAdded;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -85,7 +96,8 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [idProduct=" + idProduct + ", name=" + name + ", description=" + description + ", thumbnail="
-				+ thumbnail + ", itemPrice=" + itemPrice + ", category=" + category + ", supplier=" + supplier + "]";
+				+ thumbnail + ", itemPrice=" + itemPrice + ", dateAdded=" + dateAdded + ", category=" + category
+				+ ", supplier=" + supplier + "]";
 	}
 
 }
