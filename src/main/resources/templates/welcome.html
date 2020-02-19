@@ -9,7 +9,24 @@
 		<main id="main">
 			<header id="header">
                 <nav id="nav">
-                	<div id="menu_container">
+	                <div id="menu_container">
+	                	<div id="login_container">
+							<p th:if="${userName} != null">You are logged in as user <b><span th:text="${userName}"></span></b></p>
+							<a id="btn_login" th:if="${userName} == null" href="/login">Login</a>
+							<a id="btn_logout" th:if="${userName} != null" href="/logout">Logout</a>
+						</div>
+						
+	                	<div id="search_container">
+							<form action="/search">
+								<div class="form-group mb-2">
+									<input type="text" name="name" placeholder="Serch for your product here!"/>
+									<input type="submit" value="Search" id="search_btn">
+								</div>
+							</form>
+						</div>
+	                </div>
+                	
+                	<div id="category_container">
                 		<ul>
 	                    	<li th:each="category: ${mainCategory}">
 	                        	<span th:text="${category.name}"></span>

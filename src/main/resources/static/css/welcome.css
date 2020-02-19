@@ -31,23 +31,101 @@ ul {
 /* end general CSS */
 
 /* header CSS */
-
 #header {
 	border-bottom: 1px solid #202020;
 	float: left;
-	height: 10%;  
+	height: 20%;  
 }
 
 #header, #nav {
  	background-color: #5C5C5C;
+	width: auto;
+}
+
+	/** search CSS **/
+#menu_container {
+	float: left;
+	height: 63px;
 	width: 100%;
 }
 
-#menu_container ul {
+#login_container, #search_container {
+	display: inline-block;
+	margin-top: 8px;
+	margin-right: 8px;
+	float: right;
+}
+
+#search_container input[type=text] {
+	border: 2px solid #333333;
+	border-radius: 8px 0px 0px 8px;
+	display: inline-block;
+	padding: 12px 20px;
+}
+
+#search_container input[type=text]:focus {
+	background-color: lightblue;
+	border: 3px solid #202020;
+}
+
+#search_container #search_btn {
+	background-color: white;
+	border-radius: 0px 8px 8px 0px;
+	color: black;
+	border: 2px solid #333333;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin-left: -5px;
+}
+
+#search_container #search_btn:hover, .btn:active {
+	background-color: #202020;
+	color: white;
+}
+
+#btn_login, #btn_login:visited {
+	color: blue;
+	display: inline-block;
+	text-decoration: none;
+	padding: 3px 5px;
+}
+
+#btn_login:hover, #btn_login:active {
+	background-color: blue;
+	border-radius: 5px;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	color: white;
+	margin: 0px;
+}
+
+#btn_logout, #btn_logout:visited {
+	color: red;
+	display: inline-block;
+	text-decoration: none;
+	padding: 3px 5px;
+}
+
+#btn_logout:hover, #btn_logout:active {
+	background-color: red;
+	border-radius: 5px;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	color: white;
+	margin: 0px;
+}
+	/** end search_container CSS**/
+	
+	/** menu_container CSS **/
+#category_container ul {
 	list_style: none;
 }
 
-#menu_container ul li{
+#category_container ul li{
 	background-color: #333333;
 	border-left: 1px solid #202020;
 	border-bottom: 1px solid rgba(0,0,0,.2);
@@ -61,20 +139,20 @@ ul {
 	width: 225px;
 }
 
-#menu_container ul li:hover {
+#category_container ul li:hover {
 	color: rgb(26, 170, 218);
 	background-color: #202020;
 }
 
-#menu_container div {
+#category_container div {
 	cursor: pointer;
 }
 
-#menu_container ul ul {
+#category_container ul ul {
 	display: none;
 }
 
-#menu_container ul li:hover > ul {
+#category_container ul li:hover > ul {
 	display: block;
 	margin-top: 13px;
 	margin-left: -1px;
@@ -82,10 +160,11 @@ ul {
 	width: 226px;
 } 
 
-#menu_container ul ul li:hover > ul {
+#category_container ul ul li:hover > ul {
 	display: block;
 	margin-top: -50px;
 	margin-left: 225px;
 	position: absolute;
 } 
+	/** end menu_container CSS **/
 /* end header CSS */
