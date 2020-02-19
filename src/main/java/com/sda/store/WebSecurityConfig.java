@@ -26,10 +26,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 					.antMatchers("/public/**").permitAll()
-					.antMatchers("/css/welcome.css", "/css/product-list.css", "/css/product.css").permitAll()
-					.antMatchers("/js/welcome.js").permitAll()
+					.antMatchers("/css/welcome.css", "/css/product-list.css", "/css/product.css", "/css/product-search.css").permitAll()
+					.antMatchers("/js/welcome.js", "/js/product-search.js").permitAll()
 					.antMatchers("/images/product_thumbnail/*").permitAll()
-					.antMatchers("/", "/list/*/*/*", "/product/*").permitAll()
+					.antMatchers("/", "/list/*/*/*", "/product/*", "/search").permitAll()
 					.antMatchers("/userList/*", "/deleteUser").hasRole("ADMIN").anyRequest().authenticated()
 					.and()
 				.formLogin()
