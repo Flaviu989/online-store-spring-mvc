@@ -1,5 +1,7 @@
 package com.sda.store.service.implementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByIdProduct(id);
 	}
 
+	@Override
 	public Page<Product> findAllProducts(Pageable pageable) {
 		return productRepository.findAll(pageable);
 	}
@@ -27,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Page<Product> findProductByCategoryId(Pageable pageable, int id) {
 		return productRepository.findByCategoryIdCategory(id, pageable);
+	}
+
+	@Override
+	public List<Product> findAllProductsByNmae(String name) {
+		return productRepository.findByNameIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(name, name);
 	}
 
 }

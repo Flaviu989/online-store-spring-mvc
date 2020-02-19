@@ -1,5 +1,8 @@
 package com.sda.store.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sda.store.model.Product;
 import com.sda.store.service.CategoryService;
@@ -24,9 +28,9 @@ public class ProductController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@GetMapping("/list/{id}/{orderBy}/{page}")
+	@GetMapping("/list/{id}/{orderBy}/{pageNumber}")
 	public String displayProductsFrom(Model model, @PathVariable("id") int id, @PathVariable("orderBy") String orderBy,
-			@PathVariable("page") int pageNumber) {
+			@PathVariable("pageNumber") int pageNumber) {
 		int pageSize = 3;
 		Pageable pg = getAppropritatePageable(orderBy, pageNumber, pageSize);
 		Page<Product> productList = getAppropriateList(id, pg);
@@ -114,6 +118,27 @@ public class ProductController {
 			return String.valueOf(((double) intPrice / 1000));
 		else
 			return String.valueOf(intPrice);
+	}
+
+	@GetMapping("/search")
+	public String searchForEmail(Model model, @RequestParam(defaultValue = " ") String name) {
+		List<Product> productList = productService.findAllProductsByNmae(name);
+
+		Product firstProduct = productList.stream().findFirst().orElse(null);
+		String price = displayPrice(firstProduct);
+		String decimalPrice = String
+				.valueOf((int) ((firstProduct.getItemPrice() - (int) firstProduct.getItemPrice()) * 100));
+
+		List<Product> otherProducts = productList.stream().skip(1).collect(Collectors.toList());
+		boolean hasOtherProducts = (otherProducts.size() > 0);
+
+		model.addAttribute("product", firstProduct);
+		model.addAttribute("price", price);
+		model.addAttribute("decimalPrice", decimalPrice);
+		model.addAttribute("products", otherProducts);
+		model.addAttribute("searchName", name);
+		model.addAttribute("hasOtherProducts", hasOtherProducts);
+		return "product-search";
 	}
 
 }

@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+/* style reset */
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+* { 
+	margin: 0;
+	padding: 0;
+}
+/* end style reset */
+
+/* general CSS */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#main {
+	background-color: #5C5C5C;
+	height: 100%; 
+	width: 100%;
+}
+/* end general CSS */
+
+/* content CSS */
+	/** match result CSS **/
+#match_result_table {
+	background-color: white;
+	float: left;
+	margin-left: 400px;
+	width: 544px;
+}
+
+#price span, sup {
+	color: red;
+}
+	/** end match result CSS **/
+	
+	/** other matches CSS **/
+#other_matches_table {
+	background-color: white;
+	border-collapse: collapse;
+	float: left;
+	margin-left: 400px;
+	width: 40%;
+}
+
+
+#other_matches_table th {
+	background-color: #333333;
+	color: white;
+	height: 50px;
+	text-align: center;
+	width: 100%;
+}
+
+#other_matches_table th > div {
+	height: 100%;
+	width: 100%;
+	padding: 20px 8px 20px;
+}
+
+#other_matches_table td {
+	border-bottom: 1px solid #ddd;
+	padding: 5px 10px 5px;
+  	text-align: left;
+  	width: 100%;
+}
+
+#other_matches_table img {
+  	border-radius: 8px;
+  	width: 150px;
+}
+
+
+
+#other_matches_table .btn:link, .btn:visited {
+	background-color: white;
+	border-radius: 5px;
+	color: black;
+	border: 2px solid #333333;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-left:20px;
+}
+
+#other_matches_table .btn:hover, .btn:active {
+	background-color: #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	color: white;
+}
+
+#other_matches_table .btn_img:link, .btn_img:visited {
+	background-color: white;
+	border-radius: 5px;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-left:20px;
+}
+	/** end other matches CSS **/
+/* end content CSS*/

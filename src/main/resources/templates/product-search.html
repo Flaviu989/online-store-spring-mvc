@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="|Search for ${searchName}|"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/product-search.css}"/>
+	</head>
+	</head>
+	<body>
+		<main id="main">
+			<p th:if="product == null">No product found</p>
+			<div id="content">
+				<table th:if="product != null" id="match_result_table" th:object="${product}">
+					<tr>
+						<th colspan="2"><big>Match result:</big></th>
+					</tr>
+					<tr> 
+						<td  colspan="2">
+							<img th:id="*{thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=*{thumbnail})}" th:alt="*{thumbnail}">
+							<img th:unless="*{thumbnail} != null" th:src="@{/images/product_thumbnail/default.jpg}" alt="Default image">
+						</td>
+					</tr>
+					<tr>
+						<td th:text="*{name}"></td>
+						<td>
+							<div id="price">
+								<span th:text="${price}"></span>
+								<sup th:text="${decimalPrice}">
+								</sup><span> Lei</span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" th:text="|Description: *{description}|"></td>
+					</tr>
+					<!-- <tr>
+						<td colspan="2" th:text="|Supplied by: *{supplier}|"></td>
+					</tr> -->
+				</table>
+				
+				<table th:if="${hasOtherProducts} == true" id="other_matches_table">
+					<thead>
+						<tr>
+							<th id="start_message" colspan="3">
+								<div>
+									<p th:text="|Other results for ${searchName}|"></p>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product: ${products}" class="row">
+							<td>
+								<a class="btn_img" th:href="|/product/${product.idProduct}|">
+									<img th:id="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=${product.thumbnail})}" th:alt="${product.thumbnail}">
+									<img th:unless="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/default.jpg}" alt="Default image">
+								</a>
+							</td>
+							<td th:text="${product.name}"></td>
+							<td><a class="btn" th:href="|/product/${product.idProduct}|">See details</a></td>
+						</tr>
+						<tr>
+							<th colspan="3" >
+								<div id="btn_show" onClick="showProperRows(event)" value="0"><p>Show more</p></div>
+							</th>
+						</tr>
+						<tr>
+							<th id="end_message" colspan="3">
+								<div>
+									<p>No more reusults!</p>
+								</div>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+		<script th:src="@{/js/product-search.js}" type=""></script>
+	</body>
+</html>

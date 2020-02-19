@@ -1,5 +1,7 @@
 package com.sda.store.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +15,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	Product findByIdProduct(int id);
 
 	Page<Product> findByCategoryIdCategory(int id, Pageable pageable);
+
+	List<Product> findByNameIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(String name, String description);
 
 }
