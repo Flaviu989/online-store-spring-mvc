@@ -24,6 +24,11 @@
 								</div>
 							</form>
 						</div>
+						
+						<div id="admin_container" th:if="${userName} == admin">
+							<a id="btn_admin" href="/admin">Admin panel</a>
+						</div>
+						
 	                </div>
                 	
                 	<div id="category_container">

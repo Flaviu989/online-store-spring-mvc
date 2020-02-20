@@ -39,23 +39,45 @@ ul {
 
 #header, #nav {
  	background-color: #5C5C5C;
-	width: auto;
+	width: 100%
 }
 
-	/** search CSS **/
+	/** menu container CSS **/
 #menu_container {
 	float: left;
 	height: 63px;
 	width: 100%;
 }
 
-#login_container, #search_container {
+#login_container, #search_container, #admin_container {
 	display: inline-block;
 	margin-top: 8px;
 	margin-right: 8px;
 	float: right;
 }
 
+		/*** admin container ***/
+
+#btn_admin, #btn_admin:visited {
+	border: 1px solid white;
+	border-radius: 5px;
+	color: #08ffb9;
+	display: inline-block;
+	text-decoration: none;
+	padding: 10px 8px;
+}
+
+#btn_admin:hover, #btn_admin:active {
+	background-color: #08ffb9;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	color: white;
+	margin: 0px;
+}	
+		/*** end admin container ***/
+
+		/*** search container ***/
 #search_container input[type=text] {
 	border: 2px solid #333333;
 	border-radius: 8px 0px 0px 8px;
@@ -84,17 +106,20 @@ ul {
 	background-color: #202020;
 	color: white;
 }
-
+		/*** end search container ***/
+		
+		/*** login container ***/
 #btn_login, #btn_login:visited {
-	color: blue;
+	border: 2px solid white;
+	border-radius: 5px;
+	color: #2587f7;
 	display: inline-block;
 	text-decoration: none;
 	padding: 3px 5px;
 }
 
 #btn_login:hover, #btn_login:active {
-	background-color: blue;
-	border-radius: 5px;
+	background-color: #2587f7;
 	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
 		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
@@ -103,24 +128,26 @@ ul {
 }
 
 #btn_logout, #btn_logout:visited {
-	color: red;
+	border: 1px solid white;
+	border-radius: 5px;
+	color: #f72525;
 	display: inline-block;
 	text-decoration: none;
 	padding: 3px 5px;
 }
 
 #btn_logout:hover, #btn_logout:active {
-	background-color: red;
-	border-radius: 5px;
+	background-color: #f72525;
 	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
 		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 	color: white;
 	margin: 0px;
 }
-	/** end search_container CSS**/
+		/*** endlogin container ***/
+	/** end menu container CSS**/
 	
-	/** menu_container CSS **/
+	/** category container CSS **/
 #category_container ul {
 	list_style: none;
 }
@@ -136,7 +163,7 @@ ul {
 	line-height: 50px;
 	position: relative;
 	text-align: center;
-	width: 225px;
+	width: 16.59%;
 }
 
 #category_container ul li:hover {
@@ -158,6 +185,10 @@ ul {
 	margin-left: -1px;
 	position: absolute;
 	width: 226px;
+}
+
+#category_container ul ul li {
+	width: 100%;
 } 
 
 #category_container ul ul li:hover > ul {
@@ -166,5 +197,5 @@ ul {
 	margin-left: 225px;
 	position: absolute;
 } 
-	/** end menu_container CSS **/
+	/** end category container CSS **/
 /* end header CSS */
