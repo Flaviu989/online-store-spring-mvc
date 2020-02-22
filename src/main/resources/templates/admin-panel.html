@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${title}"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/admin-panel.css}"/>
+	</head>
+	<body>
+		<main id="main">
+			<header id="header">
+				<nav id="nav">
+					<ul>
+						<li th:onclick="|location.href='http://localhost:8080/admin/addProduct?id=0'|">Add Product</li>
+						<li th:onclick="|location.href='http://localhost:8080/admin/list?type=product'|">All Products</li>
+						<li th:onclick="|location.href='http://localhost:8080/admin/add?type=category'|">Add Category</li>
+						<li th:onclick="|location.href='http://localhost:8080/admin/list?type=category'|">All Categories</li>
+						<li th:onclick="|location.href='http://localhost:8080/admin/list?type=user'|" >All Users</li>
+						<li th:onclick="|location.href='..'|">Homepage</li>
+					</ul>
+				</nav>
+			</header>
+			<div id="container">
+				<div th:if="${message}" id="alert_msg" class="alert alert-success" role="alert">
+					<p th:text="${message}">success message</p>
+				</div>
+				<div th:if="${table_display} != none">
+					<table id="view_table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th th:text="|Edit ${table_display}|"></th>
+								<th th:text="|Delete ${table_display}|"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:if="${table_display} == product" th:each="product: ${list}">
+								<th th:text="${product.idProduct}"></th>
+								<td th:text="${product.name}"></td>
+								<td><a th:href="@{/admin/editProduct?id={idP}(idP=${product.idProduct})}"  class="btn_edit">Edit</a></td>
+								<td><a th:href="@{/admin/deleteProduct?id={idP}(idP=${product.idProduct})}" class="btn_delete" >Delete</a></td>
+							</tr>
+							<tr th:if="${table_display} == category" th:each="category: ${list}">
+								<th th:text="${category.idCategory}"></th>
+								<td th:text="${category.name}"></td>
+								<td><a class="btn_edit">Edit</a></td>
+								<td><a class="btn_delete">Delete</a></td>
+							</tr>
+							<tr th:if="${table_display} == user" th:each="user: ${list}">
+								<th th:text="${user.idUser}"></th>
+								<td th:text="|${user.firstName} ${user.lastName}|"></td>
+								<td><a class="btn_edit">Edit</a></td>
+								<td><a class="btn_delete">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
