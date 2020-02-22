@@ -15,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 //	find main categories
 	List<Category> findBySuperCategoryNull();
 
+	List<Category> findBysubCategoriesIsEmptyOrderByNameAscIdCategoryAsc();
+
 }

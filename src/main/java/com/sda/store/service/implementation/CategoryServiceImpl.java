@@ -24,4 +24,14 @@ public class CategoryServiceImpl implements CategoryService {
 	public String findCategoryById(int id) {
 		return categoryRepository.findByIdCategory(id).getName();
 	}
+
+	@Override
+	public List<Category> findAllCategories() {
+		return categoryRepository.findAll();
+	}
+
+	@Override
+	public List<Category> findSubCategory() {
+		return categoryRepository.findBysubCategoriesIsEmptyOrderByNameAscIdCategoryAsc();
+	}
 }
