@@ -1,6 +1,6 @@
 package com.sda.store.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Product {
@@ -19,7 +21,8 @@ public class Product {
 	private String description;
 	private String thumbnail;
 	private double itemPrice;
-	private LocalDate dateAdded;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dateAdded;
 
 	@ManyToOne
 	@JoinColumn(name = "idCategory")
@@ -69,11 +72,11 @@ public class Product {
 		this.itemPrice = itemPrice;
 	}
 
-	public LocalDate getDateAdded() {
+	public Date getDateAdded() {
 		return dateAdded;
 	}
 
-	public void setDateAdded(LocalDate dateAdded) {
+	public void setDateAdded(Date dateAdded) {
 		this.dateAdded = dateAdded;
 	}
 
