@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${title}"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/product-form.css}"/>
+	</head>
+	<body>
+		<main id="main">
+			<div id="content">
+				<div id="product_form">
+					<form action="#" th:action="@{/product/{id}(id=${product.idProduct})}" th:object="${product}" method="post">
+						<p th:if="*{idProduct} != 0"><big>Edit Product Form</big></p>
+						<p th:if="*{idProduct} == 0"><big>Add Product Form</big></p>
+						<table>
+							<tr th:if="*{idProduct} != 0">
+								<td><label>ID:</label></td>
+								<td>
+									<input type="hidden" th:field="*{idProduct}"/>
+									<span th:text="*{idProduct}"></span>
+								</td>
+							</tr>
+							<tr>
+								<td><label th:for="*{name}">Product name:</label></td>
+								<td><input type="text" th:field="*{name}" placeholder="type product name"></td>
+							</tr>
+							<tr>
+								<td><label th:for="*{description}">Description:</label></td>
+								<td><input type="text" th:field="*{description}" placeholder="type new description"></td>
+							</tr>
+							<tr>
+								<td><label th:for="*{thumbnail}">Thumbnail name:</label></td>
+								<td><input type="text" th:field="*{thumbnail}" placeholder="type thumbnail name"></td>
+							</tr>
+								<td><label th:for="*{itemPrice}">Price:</label></td>
+								<td><input type="number" step="0.01" min="0.0" th:field="*{itemPrice}"/></td>
+							</tr>
+							<tr>
+								<td><label th:for="*{dateAdded}">Date added in store:</label></td>
+								<td>
+									<input type="date" th:field="*{{dateAdded}}"/>
+								</td>
+							</tr>
+							</tr>
+								<td><label>Category:</label></td>
+								<td>
+									<select th:field="*{category.idCategory}">
+										<option th:each="c: ${allSubCategories}" th:value="${c.idCategory}" th:text="${c.name}"></option>
+									</select>
+								</td>
+							</tr>
+							</tr>
+								<td><label>Supplier:</label></td>
+								<td>
+									<select th:field="*{supplier.idSupplier}">
+										<option th:each="s: ${allSuppliers}" th:value="${s.idSupplier}" th:text="${s.name}"></option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" class="btn" value="Save" /></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</main>
+		
+	</body>
+</html>
