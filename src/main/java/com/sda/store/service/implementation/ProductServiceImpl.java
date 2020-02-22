@@ -37,4 +37,19 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByNameIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(name, name);
 	}
 
+	@Override
+	public List findAllProducts() {
+		return productRepository.findAll();
+	}
+
+	@Override
+	public void saveProduct(Product product) {
+		productRepository.save(product);
+	}
+
+	@Override
+	public void deleteProductWithId(int id) {
+		productRepository.deleteById(id);
+	}
+
 }

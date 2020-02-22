@@ -1,5 +1,8 @@
 package com.sda.store.controller;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,12 +15,18 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sda.store.model.Category;
 import com.sda.store.model.Product;
+import com.sda.store.model.Supplier;
 import com.sda.store.service.CategoryService;
 import com.sda.store.service.ProductService;
+import com.sda.store.service.SupplierService;
 
 @Controller
 public class ProductController {
@@ -27,6 +36,9 @@ public class ProductController {
 
 	@Autowired
 	private CategoryService categoryService;
+
+	@Autowired
+	private SupplierService supplierService;
 
 	@GetMapping("/list/{id}/{orderBy}/{pageNumber}")
 	public String displayProductsFrom(Model model, @PathVariable("id") int id, @PathVariable("orderBy") String orderBy,
@@ -105,7 +117,19 @@ public class ProductController {
 		Product product = productService.findProductByIdProduct(id);
 		String price = displayPrice(product);
 		String decimalPrice = String.valueOf((int) ((product.getItemPrice() - (int) product.getItemPrice()) * 100));
+
 		model.addAttribute("product", product);
+		model.addAttribute("price", price);
+		model.addAttribute("decimalPrice", decimalPrice);
+		return "product";
+	}
+
+	@PostMapping("/product/{id}")
+	public String saveProductWithId(Model model, @PathVariable("id") int id, @ModelAttribute("product") Product product) {
+		productService.saveProduct(product);
+		String price = displayPrice(product);
+		String decimalPrice = String.valueOf((int) ((product.getItemPrice() - (int) product.getItemPrice()) * 100));
+
 		model.addAttribute("price", price);
 		model.addAttribute("decimalPrice", decimalPrice);
 		return "product";
@@ -118,6 +142,36 @@ public class ProductController {
 			return String.valueOf(((double) intPrice / 1000));
 		else
 			return String.valueOf(intPrice);
+	}
+
+	@GetMapping("/admin/editProduct")
+	public String displayProductEditForm(Model model, @RequestParam("id") int id) {
+		String title = "Edit Product Form";
+		Product product = productService.findProductByIdProduct(id);
+		List<Category> allSubCategories = categoryService.findSubCategory();
+		List<Supplier> allSuppliers = supplierService.findAllSuppliers();
+
+		model.addAttribute("product", product);
+		model.addAttribute("allSubCategories", allSubCategories);
+		model.addAttribute("allSuppliers", allSuppliers);
+		model.addAttribute("title", title);
+		return "product-form";
+	}
+
+	@GetMapping("/admin/addProduct")
+	public String displayAddForm(Model model) {
+		String title = "Edit Product Form";
+		Product product = new Product();
+		Date today = java.util.Date.from((LocalDate.now()).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+		product.setDateAdded(today);
+		List<Category> allSubCategories = categoryService.findSubCategory();
+		List<Supplier> allSuppliers = supplierService.findAllSuppliers();
+
+		model.addAttribute("product", product);
+		model.addAttribute("allSubCategories", allSubCategories);
+		model.addAttribute("allSuppliers", allSuppliers);
+		model.addAttribute("title", title);
+		return "product-form";
 	}
 
 	@GetMapping("/search")
@@ -141,4 +195,11 @@ public class ProductController {
 		return "product-search";
 	}
 
+	@GetMapping("/admin/deleteProduct")
+	public String deletePerson(@RequestParam("id") int id, RedirectAttributes rdAttr) {
+		String redirect = "redirect:/admin";
+		productService.deleteProductWithId(id);
+		rdAttr.addFlashAttribute("message", "Product deleted!");
+		return redirect;
+	}
 }

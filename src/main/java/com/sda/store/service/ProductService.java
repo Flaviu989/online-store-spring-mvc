@@ -17,4 +17,10 @@ public interface ProductService {
 
 	List<Product> findAllProductsByNmae(String name);
 
+	List findAllProducts();
+
+	void saveProduct(Product product);
+
+	void deleteProductWithId(int id);
+
 }
