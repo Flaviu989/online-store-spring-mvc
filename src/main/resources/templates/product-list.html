@@ -38,7 +38,7 @@
 							<th></th>
 							<td>
 								<a class="btn_img" th:href="|/product/${product.idProduct}|">
-									<img th:id="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=${product.thumbnail})}" th:alt="${product.thumbnail}">
+									<img th:if="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=${product.thumbnail})}" th:alt="${product.thumbnail}">
 									<img th:unless="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/default.jpg}" alt="Default image">
 								</a>
 							</td>
