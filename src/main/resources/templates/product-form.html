@@ -9,7 +9,7 @@
 		<main id="main">
 			<div id="content">
 				<div id="product_form">
-					<form action="#" th:action="@{/product/{id}(id=${product.idProduct})}" th:object="${product}" method="post">
+					<form action="#" th:action="@{/admin/product/{id}(id=${product.idProduct})}" th:object="${product}" method="post">
 						<p th:if="*{idProduct} != 0"><big>Edit Product Form</big></p>
 						<p th:if="*{idProduct} == 0"><big>Add Product Form</big></p>
 						<table>
