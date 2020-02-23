@@ -3,9 +3,8 @@ package com.sda.store.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -15,11 +14,15 @@ import javax.persistence.OneToOne;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUser;
+	@Column(length = 45)
+	private String username;
+
+	private String password;
 	private String firstName;
 	private String lastName;
+	@Column(unique = true)
 	private String login;
+	@Column(columnDefinition = "varchar(45) default 'default'")
 	private String logo;
 	private boolean admin;
 
@@ -30,12 +33,20 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders = new ArrayList<Order>();
 
-	public int getIdUser() {
-		return idUser;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -96,8 +107,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [idUser=" + idUser + ", firstName=" + firstName + ", lastName=" + lastName + ", login=" + login
-				+ ", logo=" + logo + ", admin=" + admin + ", address=" + address + ", orders=" + orders + "]";
+		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", login=" + login + ", logo=" + logo + ", admin=" + admin + ", address=" + address
+				+ ", orders=" + orders + "]";
 	}
 
 }
