@@ -126,6 +126,8 @@ public class ProductController {
 
 	@PostMapping("/product/{id}")
 	public String saveProductWithId(Model model, @PathVariable("id") int id, @ModelAttribute("product") Product product) {
+		if (product.getThumbnail().equals(""))
+			product.setThumbnail("default");
 		productService.saveProduct(product);
 		String price = displayPrice(product);
 		String decimalPrice = String.valueOf((int) ((product.getItemPrice() - (int) product.getItemPrice()) * 100));

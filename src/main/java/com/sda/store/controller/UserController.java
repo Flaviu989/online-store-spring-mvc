@@ -30,6 +30,8 @@ public class UserController {
 	public String registerSubmit(@ModelAttribute("user") User user) {
 		user.setAdmin(false);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		if (user.getLogo().equals(""))
+			user.setLogo("default");
 		userService.saveUser(user);
 		return "redirect:/";
 	}
