@@ -56,8 +56,11 @@ ul {
 	float: right;
 }
 
+#menu_container > div > div {
+	float: right;
+	padding: 0px 0px 5px 15px;
+}
 		/*** admin container ***/
-
 #btn_admin, #btn_admin:visited {
 	border: 1px solid white;
 	border-radius: 5px;
@@ -109,7 +112,7 @@ ul {
 		/*** end search container ***/
 		
 		/*** login container ***/
-#btn_login, #btn_login:visited {
+#btn_login_register, #btn_login_register:visited {
 	border: 2px solid white;
 	border-radius: 5px;
 	color: #2587f7;
@@ -118,7 +121,7 @@ ul {
 	padding: 3px 5px;
 }
 
-#btn_login:hover, #btn_login:active {
+#btn_login_register:hover, #btn_login_register:active {
 	background-color: #2587f7;
 	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
@@ -143,6 +146,11 @@ ul {
 		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 	color: white;
 	margin: 0px;
+}
+
+#menu_container img {
+  	border-radius: 25px;
+  	width: 50px;
 }
 		/*** endlogin container ***/
 	/** end menu container CSS**/

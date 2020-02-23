@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title>Welcome to our store!</title>
@@ -11,9 +11,17 @@
                 <nav id="nav">
 	                <div id="menu_container">
 	                	<div id="login_container">
-							<p th:if="${userName} != null">You are logged in as user <b><span th:text="${userName}"></span></b></p>
-							<a id="btn_login" th:if="${userName} == null" href="/login">Login</a>
-							<a id="btn_logout" th:if="${userName} != null" href="/logout">Logout</a>
+	                		<div th:if="${userName} == null">
+	                			<a id="btn_login_register" href="/login">Login</a>
+								<a id="btn_login_register" href="/registerForm">Register</a>
+	                		</div>
+	                		<div th:if="${userName} != null">
+	                			<p>Logged in as: <b><span th:text="${userName}"></span></b></p>
+								<a id="btn_logout" href="/logout">Logout</a>
+	                		</div>
+							<div>
+								<img th:if="${userName} != null" th:src="@{/images/logo/{thumb}.png(thumb=${logo})}" th:alt="${logo}">
+							</div>
 						</div>
 						
 	                	<div id="search_container">

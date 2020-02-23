@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.sda.store.model.Category;
 import com.sda.store.service.CategoryService;
 import com.sda.store.service.ProductService;
+import com.sda.store.service.UserService;
 
 @Controller
 public class WelcomeController {
@@ -21,12 +22,18 @@ public class WelcomeController {
 	@Autowired
 	private ProductService productService;
 
+	@Autowired
+	private UserService userService;
+
 	@GetMapping("/")
 	public String displayLandingPage(Model model, Principal user) {
 		List<Category> mainCategory = categoryService.findMainCategories();
 		model.addAttribute("mainCategory", mainCategory);
-		if (user != null)
-			model.addAttribute("userName", user.getName());
+		if (user != null) {
+			String username = user.getName();
+			model.addAttribute("userName", username);
+			model.addAttribute("logo", userService.findUserByName(username).getLogo());
+		}
 		return "welcome";
 	}
 
