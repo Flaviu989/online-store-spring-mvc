@@ -35,7 +35,7 @@ public class AdminController {
 	private ProductService productService;
 
 	@Autowired
-	private UserService userSrvice;
+	private UserService userService;
 
 	@Autowired
 	private SupplierService supplierService;
@@ -69,7 +69,7 @@ public class AdminController {
 		case "category":
 			return categoryService.findAllCategories();
 		case "user":
-			return userSrvice.findAllUsers();
+			return userService.findAllUsers();
 		default:
 			return null;
 		}
@@ -136,7 +136,7 @@ public class AdminController {
 		return redirect;
 	}
 	
-	@GetMapping("/deleteProduct")
+	@GetMapping("/delete/product")
 	public String deleteProduct(@RequestParam("id") int id, RedirectAttributes rdAttr) {
 		String redirect = "redirect:/admin/list?type=product";
 		String redirectMessage = "Product with ID: " + id + " deleted!";
@@ -145,4 +145,13 @@ public class AdminController {
 		return redirect;
 	}
 	
+	@GetMapping("/delete/user")
+	public String deleteUser(@RequestParam("id") String username, RedirectAttributes rdAttr) {
+		String redirect = "redirect:/admin/list?type=user";
+		String redirectMessage = "User " + username + " deleted!";
+		userService.deleteUserWithID(username);
+		rdAttr.addFlashAttribute("message", redirectMessage);
+		return redirect;
+	}
+
 }
