@@ -12,12 +12,12 @@
 	                <div id="menu_container">
 	                	<div id="login_container">
 	                		<div th:if="${userName} == null">
-	                			<a id="btn_login_register" href="/login">Login</a>
-								<a id="btn_login_register" href="/registerForm">Register</a>
+	                			<a id="btn_login_register" th:href="@{/login}">Login</a>
+								<a id="btn_login_register" th:href="@{/register/form}">Register</a>
 	                		</div>
 	                		<div th:if="${userName} != null">
 	                			<p>Logged in as: <b><span th:text="${userName}"></span></b></p>
-								<a id="btn_logout" href="/logout">Logout</a>
+								<a id="btn_logout" th:href="@{/logout}">Logout</a>
 	                		</div>
 							<div>
 								<img th:if="${userName} != null" th:src="@{/images/logo/{thumb}.png(thumb=${logo})}" th:alt="${logo}">
