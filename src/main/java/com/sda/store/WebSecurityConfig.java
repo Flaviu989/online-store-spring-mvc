@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 					.antMatchers("/public/**").permitAll()
-					.antMatchers("/css/welcome.css", "/css/product-list.css", "/css/product.css", "/css/product-search.css").permitAll()
+					.antMatchers("/css/welcome.css", "/css/product-list.css", "/css/product.css", "/css/product-search.css", "/registerForm", "/registerSubmit").permitAll()
 					.antMatchers("/js/welcome.js", "/js/product-search.js").permitAll()
 					.antMatchers("/images/product_thumbnail/*").permitAll()
 					.antMatchers("/", "/list/*/*/*", "/product/*", "/search").permitAll()
@@ -39,15 +39,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-			.inMemoryAuthentication()
-				.withUser("admin").password(passwordEncoder().encode(adminPassword)).roles("ADMIN")
-				.and()
-				.withUser("guest").password(passwordEncoder().encode("guest")).roles("GUEST")
-				.and();
-//			.and()
-//			.jdbcAuthentication().dataSource(dataSource)
-//				.usersByUsernameQuery("select email,password,enabled " + "from users " + "where email = ?")
-//				.authoritiesByUsernameQuery("select email,authority " + "from authorities " + "where email = ?");
+//			User and password in memory
+//			.inMemoryAuthentication()
+//				.withUser("admin").password(passwordEncoder().encode(adminPassword)).roles("ADMIN")
+//				.and()
+//				.withUser("guest").password(passwordEncoder().encode("guest")).roles("GUEST")
+//				.and();
+		
+//			User and password in database
+			.jdbcAuthentication()
+				.dataSource(dataSource)
+				.usersByUsernameQuery("select username,password,1 "
+    					+ "from user "
+    					+ "where username = ?")
+    			.authoritiesByUsernameQuery("select username,"
+    					+ "IF(admin=1,'ROLE_ADMIN','ROLE_USER') as authority "
+    					+ "from user "
+    					+ "where username = ?")
+				.passwordEncoder(passwordEncoder());
 	}
 
 	@Bean
