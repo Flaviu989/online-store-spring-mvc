@@ -10,12 +10,12 @@
 			<header id="header">
 				<nav id="nav">
 					<ul>
-						<li th:onclick="|location.href='http://localhost:8080/admin/addProduct?id=0'|">Add Product</li>
-						<li th:onclick="|location.href='http://localhost:8080/admin/list?type=product'|">All Products</li>
-						<li th:onclick="|location.href='http://localhost:8080/admin/add?type=category'|">Add Category</li>
-						<li th:onclick="|location.href='http://localhost:8080/admin/list?type=category'|">All Categories</li>
-						<li th:onclick="|location.href='http://localhost:8080/admin/list?type=user'|" >All Users</li>
-						<li th:onclick="|location.href='..'|">Homepage</li>
+						<li th:onclick="|location.href='@{/admin/addProduct?id=0}'|">Add Product</li>
+						<li th:onclick="|location.href='@{/admin/list?type=product}'|">All Products</li>
+						<li th:onclick="|location.href='@{/admin/add?type=category}'|">Add Category</li>
+						<li th:onclick="|location.href='@{/admin/list?type=category}'|">All Categories</li>
+						<li th:onclick="|location.href='@{/admin/list?type=user}'|" >All Users</li>
+						<li th:onclick="|location.href='@{/}'|">Homepage</li>
 					</ul>
 				</nav>
 			</header>
