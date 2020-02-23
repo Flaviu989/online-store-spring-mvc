@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title th:text="${title}"></title>
@@ -27,8 +27,10 @@
 					<table id="view_table">
 						<thead>
 							<tr>
-								<th>ID</th>
+								<th th:if="${table_display} == user">Username</th>
+								<th th:unless="${table_display} == user">ID</th>
 								<th>Name</th>
+								<th th:if="${table_display} == user">Role</th>
 								<th th:text="|Edit ${table_display}|"></th>
 								<th th:text="|Delete ${table_display}|"></th>
 							</tr>
@@ -47,10 +49,11 @@
 								<td><a class="btn_delete">Delete</a></td>
 							</tr>
 							<tr th:if="${table_display} == user" th:each="user: ${list}">
-								<th th:text="${user.idUser}"></th>
-								<td th:text="|${user.firstName} ${user.lastName}|"></td>
+								<th th:text="${user.username}"></th>
+								<td th:text="|${user.lastName} ${user.firstName}|"></td>
+								<td th:text="${user.admin} ? 'Admin' : 'User'"></td>
 								<td><a class="btn_edit">Edit</a></td>
-								<td><a class="btn_delete">Delete</a></td>
+								<td><a th:if="${user.admin} != true" class="btn_delete">Delete</a></td>
 							</tr>
 						</tbody>
 					</table>

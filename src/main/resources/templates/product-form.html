@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
@@ -31,7 +30,7 @@
 							</tr>
 							<tr>
 								<td><label th:for="*{thumbnail}">Thumbnail name:</label></td>
-								<td><input type="text" th:field="*{thumbnail}" placeholder="type thumbnail name"></td>
+								<td><input type="text" th:field="*{thumbnail}" value="default"></td>
 							</tr>
 								<td><label th:for="*{itemPrice}">Price:</label></td>
 								<td><input type="number" step="0.01" min="0.0" th:field="*{itemPrice}"/></td>
