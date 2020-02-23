@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 import com.sda.store.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, String> {
 
-	User findByUsernameContaining(String username);
+	User findByUsername(String username);
+
+	void deleteByUsername(String username);
 
 }
