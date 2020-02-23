@@ -8,4 +8,6 @@ import com.sda.store.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+	User findByUsernameContaining(String username);
+
 }
