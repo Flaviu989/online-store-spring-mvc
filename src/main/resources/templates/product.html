@@ -28,10 +28,22 @@
 					<tr>
 						<td colspan="2" th:text="|Description: *{description}|"></td>
 					</tr>
-					<!-- <tr>
-						<td colspan="2" th:text="|Supplied by: *{supplier}|"></td>
-					</tr> -->
+					<tr>
+						<td colspan="2" th:text="|Supplied by: *{supplier.name}|"></td>
+					</tr>
 				</table>
+				<form th:if="${userName} != null" action="#" th:action="@{/cart}" th:object="${product}" method="post">
+					<table>
+						<tr>
+							<td colspan="2"><input type="submit" class="btn" value="Add to Cart" /></td>
+						</tr>
+						<tr>
+							<td><label th:for="${orderItem.quantity}">Quantity:</label></td>
+							<td><input type="number" step="1.0" min="1.0" th:field="${orderItem.quantity}"></td>
+						</tr>
+						
+					</table>
+				</form>
 			</div>
 		</main>
 		

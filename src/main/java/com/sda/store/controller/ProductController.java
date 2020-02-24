@@ -1,5 +1,6 @@
 package com.sda.store.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,10 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sda.store.model.OrderItem;
 import com.sda.store.model.Product;
 import com.sda.store.service.CategoryService;
 import com.sda.store.service.ProductService;
-import com.sda.store.service.SupplierService;
+import com.sda.store.service.UserService;
 
 @Controller
 public class ProductController {
@@ -29,8 +31,9 @@ public class ProductController {
 	@Autowired
 	private CategoryService categoryService;
 
+
 	@Autowired
-	private SupplierService supplierService;
+	private UserService userService;
 
 	@GetMapping("/list/{id}/{orderBy}/{pageNumber}")
 	public String displayProductsFrom(Model model, @PathVariable("id") int id, @PathVariable("orderBy") String orderBy,
@@ -105,11 +108,20 @@ public class ProductController {
 	}
 
 	@GetMapping("/product/{id}")
-	public String displayProductDetails(Model model, @PathVariable("id") int id) {
+	public String displayProductDetails(Model model, @PathVariable("id") int id, Principal user) {
 		Product product = productService.findProductByIdProduct(id);
 		String priceString = getPriceString(product);
 		String decimalPriceString = String.valueOf((int) ((product.getItemPrice() - (int) product.getItemPrice()) * 100));
-
+		if (user != null) {
+			String username = user.getName();
+			OrderItem orderItem = new OrderItem();
+			orderItem.setProduct(product);
+			orderItem.setUser(userService.findUserByName(username));
+			orderItem.setQuantity(1);
+			model.addAttribute("userName", username);
+			model.addAttribute("logo", userService.findUserByName(username).getLogo());
+			model.addAttribute("orderItem", orderItem);
+		}
 		model.addAttribute("product", product);
 		model.addAttribute("price", priceString);
 		model.addAttribute("decimalPrice", decimalPriceString);
