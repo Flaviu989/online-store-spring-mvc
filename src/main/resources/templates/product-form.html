@@ -10,8 +10,8 @@
 			<div id="content">
 				<div id="product_form">
 					<form action="#" th:action="@{/admin/product/{id}(id=${product.idProduct})}" th:object="${product}" method="post">
-						<p th:if="*{idProduct} != 0"><big>Edit Product Form</big></p>
-						<p th:if="*{idProduct} == 0"><big>Add Product Form</big></p>
+						<p th:if="*{idProduct} != 0"><big th:text="${title}"></big></p>
+						<p th:if="*{idProduct} == 0"><big th:text="${title}"></big></p>
 						<table>
 							<tr th:if="*{idProduct} != 0">
 								<td><label>ID:</label></td>
@@ -30,7 +30,7 @@
 							</tr>
 							<tr>
 								<td><label th:for="*{thumbnail}">Thumbnail name:</label></td>
-								<td><input type="text" th:field="*{thumbnail}" value="default"></td>
+								<td><input type="text" th:field="*{thumbnail}" placeholder="type thumbnail name"></td>
 							</tr>
 								<td><label th:for="*{itemPrice}">Price:</label></td>
 								<td><input type="number" step="0.01" min="0.0" th:field="*{itemPrice}"/></td>
