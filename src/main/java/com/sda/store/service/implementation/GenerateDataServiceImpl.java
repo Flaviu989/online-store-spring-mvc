@@ -14,6 +14,10 @@ import com.sda.store.service.GenerateDataService;
 
 @Service
 public class GenerateDataServiceImpl implements GenerateDataService {
+	
+	private final String status1 = "In progress";
+	private final String status2 = "Order placed";
+	private final String status3 = "Delivered";
 
 	@Autowired
 	private StatusRepository statusRepository;
@@ -23,20 +27,20 @@ public class GenerateDataServiceImpl implements GenerateDataService {
 		statusRepository.deleteAll();
 
 		List<Status> defaultStatuses = new ArrayList<Status>();
-		Status beforeLogin = new Status();
-		beforeLogin.setDescription("Not Authenticated");
-		defaultStatuses.add(beforeLogin);
 
 		Status beforeBuy = new Status();
-		beforeBuy.setDescription("In Progress");
+		beforeBuy.setIdStauts(1);
+		beforeBuy.setDescription(status1);
 		defaultStatuses.add(beforeBuy);
 
 		Status afterBuy = new Status();
-		afterBuy.setDescription("Order Placed");
+		afterBuy.setIdStauts(2);
+		afterBuy.setDescription(status2);
 		defaultStatuses.add(afterBuy);
 
 		Status afterDelivery = new Status();
-		afterDelivery.setDescription("Delivered");
+		afterDelivery.setIdStauts(3);
+		afterDelivery.setDescription(status3);
 		defaultStatuses.add(afterDelivery);
 
 		statusRepository.saveAll(defaultStatuses);
@@ -46,14 +50,19 @@ public class GenerateDataServiceImpl implements GenerateDataService {
 	@Override
 	public void printToConsole() {
 		System.out.println("\n--- CURRENT POSSIBLE STATUSES ---");
-		statusRepository.findAll().forEach(s -> System.out.println(s));
+		statusRepository.findByOrderByIdStauts().forEach(s -> System.out.println(s));
 	}
 
 	@PostConstruct
 	public void generateAndPrintData() {
-		if (statusRepository.findAll().size() < 4 || statusRepository.findAll().size() > 4) {
+		List<Status> statuses = statusRepository.findByOrderByIdStauts();
+		if (statuses.size() == 3) {
+			
+			if (!statuses.get(0).getDescription().equals(status1) || !statuses.get(1).getDescription().equals(status2)
+					|| !statuses.get(2).getDescription().equals(status3))
+				generateDefaultStatus();
+		} else
 			generateDefaultStatus();
-		}
 		printToConsole();
 	}
 
