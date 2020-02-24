@@ -123,8 +123,13 @@ public class AdminController {
 			@ModelAttribute("product") Product product, RedirectAttributes rdAttr) {
 		String title = "Admin Panel";
 		String tableDdisplay = "none";
-		if (product.getThumbnail().equals(""))
+		if (product.getThumbnail().trim().equals(""))
 			product.setThumbnail("default");
+		if (product.getName().trim().equals(""))
+			product.setName("Tet Product " + (int) (Math.random() * 100));
+		if (product.getDescription().trim().equals(""))
+			product.setDescription(product.getName() + "description");
+
 		productService.saveProduct(product);
 		String redirect = "redirect:/admin/list?type=product";
 		String redirectMessage = "Product " + product.getName() + " (ID: " + product.getIdProduct()
