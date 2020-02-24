@@ -1,6 +1,6 @@
 package com.sda.store.model;
 
-import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idOrder;
 	private double totalCost;
-	private LocalTime dateofOrder;
+	private Date dateofOrder;
 
 	@OneToOne
 	@JoinColumn(name = "idAddress")
@@ -62,11 +62,11 @@ public class Order {
 		this.deliveryAddress = deliveryAddress;
 	}
 
-	public LocalTime getDateofOrder() {
+	public Date getDateofOrder() {
 		return dateofOrder;
 	}
 
-	public void setDateofOrder(LocalTime dateofOrder) {
+	public void setDateofOrder(Date dateofOrder) {
 		this.dateofOrder = dateofOrder;
 	}
 
@@ -88,8 +88,9 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [idOrder=" + idOrder + ", totalCost=" + totalCost + ", deliveryAddress=" + deliveryAddress
-				+ ", dateofOrder=" + dateofOrder + ", user=" + user + ", orderItems=" + orderItems + "]";
+		return "Order [idOrder=" + idOrder + ", totalCost=" + totalCost + ", dateofOrder=" + dateofOrder
+				+ ", deliveryAddress=" + deliveryAddress + ", user=" + user + ", orderItems=" + orderItems + ", status="
+				+ status + "]";
 	}
 
 }

@@ -24,6 +24,10 @@ public class OrderItem {
 	@JoinColumn(name = "idOrder")
 	private Order order;
 
+	@ManyToOne
+	@JoinColumn(name = "idUser")
+	private User user;
+
 	public int getIdOrderItem() {
 		return idOrderItem;
 	}
@@ -64,10 +68,18 @@ public class OrderItem {
 		this.order = order;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderItem [idOrderItem=" + idOrderItem + ", productPrice=" + productPrice + ", quantity=" + quantity
-				+ ", product=" + product + ", order=" + order + "]";
+				+ ", product=" + product + ", order=" + order + ", user=" + user + "]";
 	}
 
 }
