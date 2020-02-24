@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -16,13 +18,17 @@ public class User {
 	@Id
 	@Column(length = 45)
 	private String username;
-
 	private String password;
+	@NotBlank
+	@Size(min = 2, max = 30)
 	private String firstName;
+	@NotBlank
+	@Size(min = 2, max = 30)
 	private String lastName;
-	@Column(unique = true)
+	@NotBlank
 	private String login;
 	@Column(columnDefinition = "varchar(45) default 'default'")
+	@NotBlank
 	private String logo;
 	private boolean admin;
 
@@ -32,6 +38,9 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders = new ArrayList<Order>();
+
+	@OneToMany(mappedBy = "user")
+	private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
 	public String getUsername() {
 		return username;
@@ -105,11 +114,19 @@ public class User {
 		this.orders = orders;
 	}
 
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", login=" + login + ", logo=" + logo + ", admin=" + admin + ", address=" + address
-				+ ", orders=" + orders + "]";
+				+ ", orders=" + orders + ", orderItems=" + orderItems + "]";
 	}
 
 }
