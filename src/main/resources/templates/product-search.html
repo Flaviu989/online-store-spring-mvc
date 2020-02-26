@@ -7,6 +7,14 @@
 	</head>
 	</head>
 	<body>
+		<header id="header">
+			<nav id="nav">
+				<ul>
+					<li th:onclick="|location.href='@{/}'|">Back to Homepage</li>
+					<li th:onclick="|location.href='@{/cart?edit=0&remove=0}'|">Go to Cart</li>
+				</ul>
+			</nav>
+		</header>
 		<main id="main">
 			<p th:if="product == null">No product found</p>
 			<div id="content">

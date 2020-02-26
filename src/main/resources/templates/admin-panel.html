@@ -12,9 +12,10 @@
 					<ul>
 						<li th:onclick="|location.href='@{/admin/addProduct?id=0}'|">Add Product</li>
 						<li th:onclick="|location.href='@{/admin/list?type=product}'|">All Products</li>
-						<li th:onclick="|location.href='@{/admin/add?type=category}'|">Add Category</li>
+						<li th:onclick="|location.href='@{/admin/addCategory?id=0}'|">Add Category</li>
 						<li th:onclick="|location.href='@{/admin/list?type=category}'|">All Categories</li>
 						<li th:onclick="|location.href='@{/admin/list?type=user}'|" >All Users</li>
+						<li th:onclick="|location.href='@{/admin/list?type=order}'|" >All Orders</li>
 						<li th:onclick="|location.href='@{/}'|">Homepage</li>
 					</ul>
 				</nav>
@@ -29,8 +30,10 @@
 							<tr>
 								<th th:if="${table_display} == user">Username</th>
 								<th th:unless="${table_display} == user">ID</th>
-								<th>Name</th>
+								<th th:if="${table_display} == order">Username</th>
+								<th th:unless="${table_display} == order">Name</th>
 								<th th:if="${table_display} == user">Role</th>
+								<th th:if="${table_display} == order">Address</th>
 								<th th:text="|Edit ${table_display}|"></th>
 								<th th:text="|Delete ${table_display}|"></th>
 							</tr>
@@ -52,8 +55,15 @@
 								<th th:text="${user.username}"></th>
 								<td th:text="|${user.lastName} ${user.firstName}|"></td>
 								<td th:text="${user.admin} ? 'Admin' : 'User'"></td>
-								<td><a class="btn_edit">Edit</a></td>
+								<td><a th:href="@{/admin/editUser?id={idU}(idU=${user.username})}" class="btn_edit">Edit</a></td>
 								<td><a th:if="${user.admin} != true" th:href="@{/admin/delete/user?id={idU}(idU=${user.username})}" class="btn_delete">Delete</a></td>
+							</tr>
+							<tr th:if="${table_display} == order" th:each="order: ${list}">
+								<th th:text="|${order.idOrder} / ${order.dateOfOrder}|"></th>
+								<td th:text="${order.user.username}"></td>
+								<td th:text="|${order.user.address.street}, ${order.user.address.city}, ${order.user.address.country}|"></td>
+								<td><a th:href="@{/admin/editOrder?id={idO}(idO=${order.idOrder})}" class="btn_edit">Edit</a></td>
+								<td><a th:href="@{/admin/delete/order?id={idO}(idO=${order.idOrder})}" class="btn_delete">Delete</a></td>
 							</tr>
 						</tbody>
 					</table>
