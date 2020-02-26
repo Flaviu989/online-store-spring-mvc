@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="|${userName}'s orders|"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/order.css}"/>
+	</head>
+	<body>
+		<main id="main">
+			<header id="header">
+				<nav id="nav">
+					<ul>
+						<li th:onclick="|location.href='@{/}'|">Back to Homepage</li>
+						<li th:onclick="|location.href='@{/cart?edit=0&remove=0}'|">Go to Cart</li>
+					</ul>
+				</nav>
+			</header>
+			<div id="content">
+				<table id="view_table">
+					<tr>
+						<th></th>
+						<th>Order</th>
+						<th>Address</th>
+						<th>Price</th>
+						<th>Status</th>
+					</tr>
+					<tr th:each="order: ${orders}">
+						<th></th>
+						<td th:text="|${order.idOrder} / ${order.dateOfOrder}|">
+						<td th:text="|${order.user.address.street}, ${order.user.address.city}, ${order.user.address.country} |"></td>
+						<td th:text="|${order.totalCost} Lei|"></td>
+						<td th:text="|${order.status.description}|"></td>
+					</tr>
+				</table>
+			</div>
+		</main>
+	</body>
+</html>
