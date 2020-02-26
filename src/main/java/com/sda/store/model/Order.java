@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,11 +20,7 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idOrder;
 	private double totalCost;
-	private Date dateofOrder;
-
-	@OneToOne
-	@JoinColumn(name = "idAddress")
-	private Address deliveryAddress;
+	private Date dateOfOrder;
 
 	@ManyToOne
 	@JoinColumn(name = "idUser")
@@ -54,20 +49,12 @@ public class Order {
 		this.totalCost = totalCost;
 	}
 
-	public Address getDeliveryAddress() {
-		return deliveryAddress;
+	public Date getDateOfOrder() {
+		return dateOfOrder;
 	}
 
-	public void setDeliveryAddress(Address deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
-
-	public Date getDateofOrder() {
-		return dateofOrder;
-	}
-
-	public void setDateofOrder(Date dateofOrder) {
-		this.dateofOrder = dateofOrder;
+	public void setDateOfOrder(Date dateOfOrder) {
+		this.dateOfOrder = dateOfOrder;
 	}
 
 	public User getUser() {
@@ -86,11 +73,18 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "Order [idOrder=" + idOrder + ", totalCost=" + totalCost + ", dateofOrder=" + dateofOrder
-				+ ", deliveryAddress=" + deliveryAddress + ", user=" + user + ", orderItems=" + orderItems + ", status="
-				+ status + "]";
+		return "Order [idOrder=" + idOrder + ", totalCost=" + totalCost + ", dateOfOrder=" + dateOfOrder + ", user="
+				+ user + ", orderItems=" + orderItems + ", status=" + status + "]";
 	}
 
 }

@@ -13,7 +13,7 @@ public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idOrderItem;
-	private int productPrice;
+	private double productPrice;
 	private int quantity;
 
 	@ManyToOne
@@ -36,11 +36,11 @@ public class OrderItem {
 		this.idOrderItem = idOrderItem;
 	}
 
-	public int getProductPrice() {
+	public double getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(int productPrice) {
+	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
 

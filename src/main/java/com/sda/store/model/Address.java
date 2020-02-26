@@ -15,16 +15,12 @@ public class Address {
 	private int idAddress;
 	private String country;
 	private String city;
-	private String streeet;
+	private String street;
 	private String zip;
 
 	@OneToOne
 	@JoinColumn(name = "idUser")
 	private User user;
-
-	@OneToOne
-	@JoinColumn(name = "idOrder")
-	private Order order;
 
 	public int getIdAddress() {
 		return idAddress;
@@ -50,12 +46,12 @@ public class Address {
 		this.city = city;
 	}
 
-	public String getStreeet() {
-		return streeet;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setStreeet(String streeet) {
-		this.streeet = streeet;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	public String getZip() {
@@ -76,7 +72,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [idAddress=" + idAddress + ", country=" + country + ", city=" + city + ", streeet=" + streeet
-				+ ", zip=" + zip + "]";
+		return "Address [idAddress=" + idAddress + ", country=" + country + ", city=" + city + ", street=" + street
+				+ ", zip=" + zip + ", user=" + user + "]";
 	}
+
 }
