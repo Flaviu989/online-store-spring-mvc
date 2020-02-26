@@ -26,12 +26,53 @@ body {
 }
 /* end general CSS */
 
+/* header CSS */
+#header {
+	border-bottom: 1px solid #202020;
+	float: left;
+	height: 10%;  
+}
+
+#header, #nav {
+ 	background-color: #5C5C5C;
+	width: 101%;
+}
+
+#nav ul {
+	list_style: none;
+}
+
+#nav ul li{
+	background-color: #333333;
+	border-left: 1px solid #202020;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	color: white;
+	display: block; 
+	float: left;
+	height: 63px; 
+	line-height: 50px;
+	position: relative;
+	text-align: center;
+	width: 48.85%;
+}
+
+#nav ul li:hover {
+	color: rgb(26, 170, 218);
+	cursor: pointer;
+	background-color: #202020;
+}
+/* end header CSS */
+
 /* content CSS */
+#content {
+	height: 90%;
+}
 	/** match result CSS **/
 #match_result_table {
 	background-color: white;
 	float: left;
-	margin-left: 400px;
+	height: 100%;
+	/* margin-left: 400px; */
 	width: 544px;
 }
 
@@ -45,7 +86,7 @@ body {
 	background-color: white;
 	border-collapse: collapse;
 	float: left;
-	margin-left: 400px;
+	/* margin-left: 400px; */
 	width: 40%;
 }
 

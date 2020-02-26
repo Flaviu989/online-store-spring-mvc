@@ -62,7 +62,7 @@ ul {
 }
 		/*** admin container ***/
 #btn_admin, #btn_admin:visited {
-	border: 1px solid white;
+	border: 2px solid white;
 	border-radius: 5px;
 	color: #08ffb9;
 	display: inline-block;
@@ -81,16 +81,23 @@ ul {
 		/*** end admin container ***/
 
 		/*** search container ***/
+#search_container {
+	width: 700px;
+}
+		
 #search_container input[type=text] {
 	border: 2px solid #333333;
 	border-radius: 8px 0px 0px 8px;
 	display: inline-block;
+	font-size: 13px;
 	padding: 12px 20px;
+	width: 80%;
 }
 
 #search_container input[type=text]:focus {
 	background-color: lightblue;
 	border: 3px solid #202020;
+	width: 79%
 }
 
 #search_container #search_btn {
@@ -113,7 +120,7 @@ ul {
 		
 		/*** login container ***/
 #btn_login_register, #btn_login_register:visited {
-	border: 2px solid white;
+	border: 1px solid white;
 	border-radius: 5px;
 	color: #2587f7;
 	display: inline-block;
@@ -171,6 +178,7 @@ ul {
 	line-height: 50px;
 	position: relative;
 	text-align: center;
+	text-shadow: 3px 2px #202020;
 	width: 16.59%;
 }
 

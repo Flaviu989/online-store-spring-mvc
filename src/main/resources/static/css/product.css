@@ -26,12 +26,144 @@ body {
 }
 /* end general CSS */
 
-/* content CSS */
-table {
-	background-color: white;
+/* header CSS */
+#header {
+	border-bottom: 1px solid #202020;
+	float: left;
+	height: 10%;  
 }
 
-#price span, sup {
-	color: red;
+#header, #nav {
+ 	background-color: #5C5C5C;
+	width: 101%;
 }
+
+#nav ul {
+	list_style: none;
+}
+
+#nav ul li{
+	background-color: #333333;
+	border-left: 1px solid #202020;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	color: white;
+	display: block; 
+	float: left;
+	height: 63px; 
+	line-height: 50px;
+	position: relative;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+	width: 33.25%;
+}
+
+#nav ul li:hover {
+	color: rgb(26, 170, 218);
+	cursor: pointer;
+	background-color: #202020;
+}
+/* end header CSS */
+
+/* content CSS */
+#content {
+	float: left;
+	height: 90%;
+	width: 100%;
+}
+	/** product table CSS **/
+#product_table {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#alet_msg{
+	background-color: #333333;
+	color: #f72525;
+}
+
+#product_table th {
+	background-color: #333333;
+	border-bottom: 1px solid #ddd;
+	color: #f72525;
+	text-shadow: 3px 2px #202020;
+}
+
+#product_table td {
+  	text-align: left;
+}
+
+#title {
+	font-size: x-large;
+}
+
+#price {
+	font-size: large;
+}
+
+#price #pr, #dec {
+	color: #f72525;
+}
+	/** end product table CSS **/
+
+	/** cart form CSS **/
+#cart {
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#cart input[type=submit] {
+	background-color: white;
+	border-radius: 5px;
+	border: 2px solid #333333;
+	color: black;
+	font-size: 16px;
+	padding: 10px 20px;
+	margin: 4px 2px;
+	text-decoration: none;
+}
+
+#cart input[type=submit]:hover {
+	background-color: #333333;
+	border: 2px solid #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	cursor: pointer;
+	color: white;
+}
+	
+#cart td {
+	padding: 2px 10px 2px;
+  	text-align: left;
+}
+
+#cart label {
+	font-size: large;
+}
+
+#cart input[type=number] {
+  border: 2px solid #333333;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+#cart input[type=number]:focus {
+  background-color: #333333;
+  border: 3px solid #202020;
+  color: white;
+}
+	/** end cart form CSS **/
 /* end content CSS */
