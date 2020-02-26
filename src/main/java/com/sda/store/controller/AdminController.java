@@ -20,6 +20,7 @@ import com.sda.store.model.Category;
 import com.sda.store.model.Product;
 import com.sda.store.model.Supplier;
 import com.sda.store.service.CategoryService;
+import com.sda.store.service.OrderService;
 import com.sda.store.service.ProductService;
 import com.sda.store.service.SupplierService;
 import com.sda.store.service.UserService;
@@ -36,6 +37,9 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private OrderService orderService;
 
 	@Autowired
 	private SupplierService supplierService;
@@ -70,6 +74,8 @@ public class AdminController {
 			return categoryService.findAllCategories();
 		case "user":
 			return userService.findAllUsers();
+		case "order":
+			return orderService.findAllOrders();
 		default:
 			return null;
 		}
@@ -82,6 +88,8 @@ public class AdminController {
 		case "category":
 			return type;
 		case "user":
+			return type;
+		case "order":
 			return type;
 		default:
 			return "none";
@@ -103,7 +111,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/addProduct")
-	public String displayAddForm(Model model, @RequestParam("id") int id) {
+	public String displayProductAddForm(Model model, @RequestParam("id") int id) {
 		String title = "Add Product Form";
 		Product product = new Product();
 		Date today = java.util.Date.from((LocalDate.now()).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
@@ -155,6 +163,15 @@ public class AdminController {
 		String redirect = "redirect:/admin/list?type=user";
 		String redirectMessage = "User " + username + " deleted!";
 		userService.deleteUserWithID(username);
+		rdAttr.addFlashAttribute("message", redirectMessage);
+		return redirect;
+	}
+
+	@GetMapping("/delete/order")
+	public String deleteOrder(@RequestParam("id") int id, RedirectAttributes rdAttr) {
+		String redirect = "redirect:/admin/list?type=order";
+		String redirectMessage = "Order with ID: " + id + " deleted!";
+		orderService.deleteOrderWithId(id);
 		rdAttr.addFlashAttribute("message", redirectMessage);
 		return redirect;
 	}

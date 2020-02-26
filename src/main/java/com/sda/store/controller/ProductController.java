@@ -63,25 +63,23 @@ public class ProductController {
 	}
 
 	private Pageable getAppropritatePageable(String orderBy, int pageNumber, int pageSize) {
-		Pageable pg;
 		switch (orderBy) {
 		case "nameOrder":
-			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("name")));
+			return PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("name")));
 		case "dateOrderAsc":
-			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("dateAdded"), Order.asc("name")));
+			return PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("dateAdded"), Order.asc("name")));
 		case "dateOrderDesc":
-			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.desc("dateAdded"), Order.asc("name")));
+			return PageRequest.of(pageNumber, pageSize, Sort.by(Order.desc("dateAdded"), Order.asc("name")));
 		default:
-			return pg = PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("name")));
+			return PageRequest.of(pageNumber, pageSize, Sort.by(Order.asc("name")));
 		}
 	}
 
 	private Page<Product> getAppropriateList(int id, Pageable pg) {
-		Page<Product> productList;
 		if (id == 0)
-			return productList = productService.findAllProducts(pg);
+			return productService.findAllProducts(pg);
 		else
-			return productList = productService.findProductByCategoryId(pg, id);
+			return productService.findProductByCategoryId(pg, id);
 	}
 
 	private String getCategoryName(int id) {
@@ -94,7 +92,6 @@ public class ProductController {
 	}
 
 	private String getOrderOfListTitle(String orderBy) {
-		String orderOfList;
 		switch (orderBy) {
 		case "nameOrder":
 			return "Name";
@@ -115,8 +112,6 @@ public class ProductController {
 		if (user != null) {
 			String username = user.getName();
 			OrderItem orderItem = new OrderItem();
-			orderItem.setProduct(product);
-			orderItem.setUser(userService.findUserByName(username));
 			orderItem.setQuantity(1);
 			model.addAttribute("userName", username);
 			model.addAttribute("logo", userService.findUserByName(username).getLogo());
@@ -130,7 +125,6 @@ public class ProductController {
 
 	private String getPriceString(Product product) {
 		int intPrice = (int) product.getItemPrice();
-		String price;
 		if (intPrice % 1000 == 0)
 			return String.valueOf(((double) intPrice / 1000));
 		else
