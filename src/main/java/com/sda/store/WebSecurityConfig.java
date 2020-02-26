@@ -30,7 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/js/welcome.js", "/js/product-search.js").permitAll()
 					.antMatchers("/images/product_thumbnail/*").permitAll()
 					.antMatchers("/", "/list/*/*/*", "/product/*", "/search").permitAll()
-					.antMatchers("/admin", "admin/*", "/css/admin-panel.css").hasRole("ADMIN").anyRequest().authenticated()
+					.antMatchers("/cart", "/orders", "/user", "/css/cart.css", "/css/order.css", "/css/user.css").authenticated()
+					.antMatchers("/admin", "admin/**", "/css/admin-panel.css").hasRole("ADMIN").anyRequest().authenticated()
 					.and()
 				.formLogin()
 					.permitAll();
