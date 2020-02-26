@@ -28,14 +28,12 @@ CREATE TABLE `address` (
   `id_address` int(11) NOT NULL AUTO_INCREMENT,
   `city` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
-  `streeet` varchar(255) DEFAULT NULL,
   `zip` varchar(255) DEFAULT NULL,
-  `id_order` int(11) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL,
+  `id_user` varchar(45) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_address`),
-  KEY `FK1bp3n2bul8gsvf8h7oi81u9yp` (`id_order`),
   KEY `FKpmtr515lcs96s5mnrhbakm097` (`id_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +42,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,'Oradea','Romania','410473','admin','Dimitrie Cantemir, nr. 21'),(2,'Oradea','Romania','410474','guest','Gheorghe Doja, nr.9');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,16 +81,14 @@ DROP TABLE IF EXISTS `order`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `order` (
   `id_order` int(11) NOT NULL AUTO_INCREMENT,
-  `dateof_order` time DEFAULT NULL,
   `total_cost` double NOT NULL,
-  `id_address` int(11) DEFAULT NULL,
   `id_status` int(11) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL,
+  `id_user` varchar(45) DEFAULT NULL,
+  `date_of_order` date DEFAULT NULL,
   PRIMARY KEY (`id_order`),
-  KEY `FKewub0oyxeenjjy48ruokgwqus` (`id_address`),
   KEY `FKhjqx4af4r3yjk6vr1ukk7fykw` (`id_status`),
   KEY `FKgjl21ndpbn5ndl6qwbx14y8wq` (`id_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,10 +113,12 @@ CREATE TABLE `order_item` (
   `quantity` int(11) NOT NULL,
   `id_order` int(11) DEFAULT NULL,
   `id_product` int(11) DEFAULT NULL,
+  `id_user` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_order_item`),
   KEY `FK91bchbncxidkjypdysx5pvwyb` (`id_order`),
-  KEY `FKhpraxq28c9p8aljm2jebpun9s` (`id_product`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKhpraxq28c9p8aljm2jebpun9s` (`id_product`),
+  KEY `FKmapf29bt6jk73sn5354pnbmav` (`id_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,14 +142,14 @@ CREATE TABLE `product` (
   `description` varchar(255) DEFAULT NULL,
   `item_price` double NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `thumbnail` varchar(255) DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT 'default',
   `id_category` int(11) DEFAULT NULL,
   `id_supplier` int(11) DEFAULT NULL,
   `date_added` date DEFAULT NULL,
   PRIMARY KEY (`id_product`),
   KEY `FK5cxv31vuhc7v32omftlxa8k3c` (`id_category`),
   KEY `FK7vecnfptx4ologqg55y3v7mbm` (`id_supplier`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +158,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Televizor Smart LED Star-Light, 81 cm, 32DM6600, HD',549,'Televizor LED Smart Star-Light','Televizor LED Smart Star-Light',25,1,'2020-02-13'),(2,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','Televizor LED Smart Samsung',25,2,'2020-02-13'),(3,'Televizor LED Smart LG, 108 cm, 43UM7100PLB, 4K Ultra HD',1499.99,'Televizor LED Smart LG','Televizor LED Smart LG',25,3,'2020-02-13'),(4,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','Televizor LED Smart Samsung 4k',26,2,'2020-02-14'),(5,'Televizor LED Smart Philips, 126 cm, 50PUS6804/12, 4K Ultra HD',2199.99,'Televizor LED Smart Philips','Televizor LED Smart Philips 4k',26,4,'2020-02-14');
+INSERT INTO `product` VALUES (1,'Televizor Smart LED Star-Light, 81 cm, 32DM6600, HD',549.1,'Televizor LED Smart Star-Light','Televizor LED Smart Star-Light',25,1,'2020-02-13'),(2,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung','Televizor LED Smart Samsung',25,2,'2020-02-13'),(3,'Televizor LED Smart LG, 108 cm, 43UM7100PLB, 4K Ultra HD',1499.99,'Televizor LED Smart LG','Televizor LED Smart LG',25,3,'2020-02-13'),(4,'Televizor LED Smart Samsung, 108 cm, 43RU7102, 4K Ultra HD',1499.99,'Televizor LED Smart Samsung 4K','Televizor LED Smart Samsung 4k',26,2,'2020-02-14'),(5,'Televizor LED Smart Philips, 126 cm, 50PUS6804/12, 4K Ultra HD',2199.99,'Televizor LED Smart Philips 4K','Televizor LED Smart Philips 4k',26,4,'2020-02-14'),(39,'Tet Product 30description',0,'Tet Product 30','default',26,3,'2020-02-23');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +170,7 @@ DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `status` (
-  `id_stauts` int(11) NOT NULL AUTO_INCREMENT,
+  `id_stauts` int(11) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_stauts`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -183,7 +182,7 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES (1,'Not Authenticated'),(2,'In Progress'),(3,'Order Placed'),(4,'Delivered');
+INSERT INTO `status` VALUES (1,'In progress'),(2,'Order placed'),(3,'Delivered');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,14 +219,15 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
   `admin` bit(1) NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
-  `login` varchar(255) DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `id_address` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_user`),
+  `login` varchar(255) DEFAULT NULL,
+  `logo` varchar(45) DEFAULT 'default',
+  PRIMARY KEY (`username`),
   KEY `FKmowmggc5uiyuix3pmqay8nf0h` (`id_address`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -238,6 +238,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('admin',_binary '','Flaviu','Pop','$2a$10$7Yz61vmQNb54mZMiNCVF3OXomZ/H4cgOZhxbXpvzHvMUcNqoIE3x2',1,'popflaviufelician@yahoo.com','Flaviu'),('guest',_binary '\0','Test','Bot','$2a$10$ftcaktuPoZvGpNZZY3DgquOu2QiGhqwHjNJlWNzva3ATlkLlhohnm',2,'testbot@gmail.com','default');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-16 19:26:34
+-- Dump completed on 2020-02-26 17:26:01
