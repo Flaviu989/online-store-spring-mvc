@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="|${userName}'s cart|"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}"/>
+	</head>
+	<body>
+		<main id="main">
+			<header id="header">
+				<nav id="nav">
+					<ul>
+						<li th:onclick="|location.href='@{/}'|">Back to Homepage</li>
+						<li th:onclick="|location.href='@{/orders}'|">Go to Orders</li>
+					</ul>
+				</nav>
+			</header>
+			
+			<div id="content" th:if="${userName} != null">
+				<div id="alert_msg" th:if="${#lists.size(orderItems)} < 1">
+					<p>Cart empty!</p>
+				</div>
+				
+				<div id="in_cart" th:if="${#lists.size(orderItems)} >= 1">
+					<ul id="cart">
+						<li th:each="orderItem: ${orderItems}">
+							<table>
+								<tr>
+									<th colspan="2">Product</th>
+									<th>Quantity</th>
+									<th>Price</th>
+									<th></th>
+									<th></th>
+								</tr>
+								<tr>
+									<td><img th:if="${orderItem.product.thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=${orderItem.product.thumbnail})}" th:alt="${orderItem.product.thumbnail}"></td>
+									<td th:text=${orderItem.product.name}></td>
+									<td th:text=${orderItem.quantity}></td>
+									<td th:text=${orderItem.productPrice}></td>
+									<td><a class="btn" th:href="@{|/cart?edit=${orderItem.idOrderItem}&remove=0|}">Edit</a></td>
+									<td><a class="btn" th:href="@{|/cart?edit=0&remove=${orderItem.idOrderItem}|}">Remove</a></td>
+								</tr>
+							</table>
+						</li>
+					</ul>
+					
+					<div th:if="${display} == edit" id="order_item_edit">
+						<form action="#" th:action="@{|/cart?edit=${ordItem.idOrderItem}&remove=0|}" th:object="${ordItem}" method="post">
+							<table>
+								<tr>
+									<th colspan="2"><label th:for="*{quantity}" th:text="|*{product.name} quantity: |"></label></th>
+								</tr>
+								<tr>
+									<td><input type="number" step="1.0" min="1.0" th:field="*{quantity}" /></td>
+									<td><input type="submit" value="Save changes" /></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			<div id="order_submit" th:if="${#lists.size(orderItems)} >= 1">
+				<form action="#" th:action="@{|/orders|}" th:object="${address}" method="post">
+					<input type="submit" value="Confirm order" />
+				</form>
+			</div>
+		</main>
+	</body>
+</html>

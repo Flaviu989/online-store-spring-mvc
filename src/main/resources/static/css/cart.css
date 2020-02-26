@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+/* style reset */
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+* { 
+	margin: 0;
+	padding: 0;
+}
+/* end style reset */
+
+/* general CSS */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#main {
+	background-color: #5C5C5C;
+	height: 100%; 
+	width: 100%;
+}
+
+#main input[type=submit] {
+	background-color: white;
+	border-radius: 5px;
+	border: 2px solid #333333;
+	color: black;
+	font-size: 16px;
+	padding: 10px 20px;
+	margin: 4px 2px;
+	text-decoration: none;
+}
+
+#main input[type=submit]:hover {
+	background-color: #333333;
+	border: 2px solid #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	cursor: pointer;
+	color: white;
+}
+/* end general CSS */
+
+/* header CSS */
+#header {
+	border-bottom: 1px solid #202020;
+	float: left;
+	height: 10%;  
+}
+
+#header, #nav {
+ 	background-color: #5C5C5C;
+	width: 101%;
+}
+
+#nav ul {
+	list_style: none;
+}
+
+#nav ul li{
+	background-color: #333333;
+	border-left: 1px solid #202020;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	color: white;
+	display: block; 
+	float: left;
+	height: 63px; 
+	line-height: 50px;
+	position: relative;
+	text-align: center;
+	width: 49.89%;
+}
+
+#nav ul li:hover {
+	color: rgb(26, 170, 218);
+	cursor: pointer;
+	background-color: #202020;
+}
+/* end header CSS */
+
+/* content CSS */
+#content {
+	background-color: white;
+	float: left;
+}
+
+#alert_msg {
+	background-color: #333333;
+	border: 2px solid #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	border-radius: 5px;
+	color: #f72525;
+	display: block;
+	float:left;
+	font-size: xxx-large;
+	height: 85%;
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 20px;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+	width: 95%
+}
+
+#content {
+	height: 80%;
+	width: 100%;
+}
+
+#in_cart #cart, #order_item_edit {
+	float: left;
+}
+
+	/** end cart css**/
+#cart table {
+	background-color: white;
+	border-collapse: collapse;
+	border-bottom: 1px solid #ddd;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 100%;
+}
+
+#cart table th {
+	background-color: #333333;
+	border-bottom: 1px solid #ddd;
+	color: white;
+	height: 50px;
+	padding: 5px 10px 5px;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+}
+
+#cart table td {
+	border-bottom: 1px solid #ddd;
+	padding: 5px 10px 5px;
+  	text-align: center;
+}
+
+#cart img {
+	border-radius: 5px;
+	display: inline-block;
+	width: 100px;
+}
+
+#cart .btn:link, .btn:visited {
+	background-color: white;
+	border-radius: 5px;
+	border: 2px solid #333333;
+	color: black;
+	display: inline-block;
+	font-size: 16px;
+	padding: 10px 20px;
+	margin-left:20px;
+	text-align: center;
+	text-decoration: none;
+}
+
+#cart .btn:hover, .btn:active {
+	background-color: #333333;
+	border: 2px solid #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	cursor: pointer;
+	color: white;
+}
+	/** end cart css**/
+
+	/** order item css**/
+#order_item_edit {
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	margin-left: 20px;
+	margin-top: 10px;
+	width: 30%;
+}
+
+#order_item_edit table {
+	width: 100%;
+}
+
+#order_item_edit th {
+	background-color: #333333;
+	border-bottom: 1px solid #ddd;
+	color: white;
+	height: 50px;
+	padding: 5px 10px 5px;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+}
+
+#order_item_edit td {
+	border-bottom: 1px solid #ddd;
+	padding: 5px 10px 5px;
+  	text-align: center;
+  	text-shadow: 3px 2px #202020;
+}
+	/** end order item css**/
+/* end content CSS */
+
+#order_submit {
+	background-color: white;
+	flost: left;
+	height: 10%;
+	width: 100%;
+}
+
+
