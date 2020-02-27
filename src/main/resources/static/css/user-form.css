@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+/* style reset */
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+* { 
+	margin: 0;
+	padding: 0;
+}
+/* end style reset */
+
+/* general CSS */
+html {
+	background-color: #5C5C5C;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#main {
+	width: 100%;
+}
+/* end general CSS */
+
+/* header CSS */
+#header {
+	border-bottom: 1px solid #202020;
+	float: left;
+	height: 40px;  
+}
+
+#header, #nav {
+ 	background-color: #5C5C5C;
+	width: 100%;
+}
+
+#nav ul {
+	list_style: none;
+}
+
+#nav ul li{
+	background-color: #333333;
+	border-left: 1px solid #202020;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	color: white;
+	display: block; 
+	float: left;
+	height: 50px; 
+	line-height: 40px;
+	position: relative;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+	width: 100%;
+}
+
+#nav ul li:hover {
+	color: rgb(26, 170, 218);
+	cursor: pointer;
+	background-color: #202020;
+}
+/* end header CSS */
+
+/* content CSS */
+#content{
+	float: left;
+}
+
+p {
+	color: white;
+	font-size: xx-large;
+	margin-top: 20px;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+}
+
+#content > form {
+	background-color: white;
+	border: 2px solid #333333;
+	border-radius: 8px;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	float: left;
+	margin-top: 20px;
+	margin-left: 200px;
+	width: 70%
+}
+
+#content table {
+	float: left;
+	margin-left: 30px;
+	padding: 10px 20px;
+}
+
+#content input[type=text] {
+  border: 2px solid #333333;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+#content input[type=text]:focus {
+  background-color: #333333;
+  border: 3px solid #202020;
+  color: white;
+}
+
+#content input[type=password] {
+  border: 2px solid #333333;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+#content input[type=password]:focus {
+  background-color: #333333;
+  border: 3px solid #202020;
+  color: white;
+}
+
+#content input[type=number] {
+  border: 2px solid #333333;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+#content input[type=number]:focus {
+  background-color: #333333;
+  border: 3px solid #202020;
+  color: white;
+}
+
+#content input[type=date] {
+  border: 2px solid #333333;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+#content input[type=date]:focus {
+  background-color: #333333;
+  border: 3px solid #202020;
+  color: white;
+}
+
+#content .btn, .btn:visited {
+	background-color: white;
+	border-radius: 5px;
+	color: black;
+	border: 2px solid #333333;
+	padding: 15px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-top: 10px;
+	margin-left: 200px;
+}
+
+#content .btn:hover, .btn:active {
+	background-color: #333333;
+	border: 2px solid #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	color: white;
+}
+/* end content CSS */
