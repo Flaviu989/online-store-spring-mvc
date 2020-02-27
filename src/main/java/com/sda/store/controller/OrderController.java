@@ -51,12 +51,27 @@ public class OrderController {
 		orderItem.setProduct(productService.findProductByIdProduct(id));
 		orderItem.setUser(userService.findUserByName(user.getName()));
 		orderItem.setProductPrice(productService.findProductByIdProduct(id).getItemPrice());
+
+		orderItem = checkForDuplicate(orderItem, user);
+
 		orderItemService.saveOrderItem(orderItem);
 		String redirect = "redirect:/product/" + id;
 		String redirectMessage = "Product" + orderItem.getProduct().getName() + " added to cart.";
 
 		rdAttr.addFlashAttribute("message", redirectMessage);
 		return redirect;
+	}
+
+	private OrderItem checkForDuplicate(OrderItem orderItem, Principal user) {
+		OrderItem[] original = { orderItem };
+		List<OrderItem> checkList = orderItemService.findProductsInCart(user.getName());
+		checkList.stream().forEach(oI -> {
+			if (oI.getProduct().getIdProduct() == original[0].getProduct().getIdProduct()) {
+				original[0].setQuantity(original[0].getQuantity() + oI.getQuantity());
+				orderItemService.deleteOrderItemWithId(oI.getIdOrderItem());
+			}
+		});
+		return original[0];
 	}
 
 	@GetMapping("/cart")
@@ -67,9 +82,8 @@ public class OrderController {
 			String username = user.getName();
 			List<OrderItem> orderItems = orderItemService.findProductsInCart(username);
 			if (editId != 0) {
-				OrderItem orderItem = orderItemService.findOrderItemWithId(editId);
 				display = "edit";
-				model.addAttribute("ordItem", orderItem);
+				model.addAttribute("ordItem", orderItemService.findOrderItemWithId(editId));
 			}
 			if (removeId != 0) {
 				orderItemService.deleteOrderItemWithId(removeId);
@@ -92,17 +106,15 @@ public class OrderController {
 		orderItem.setIdOrderItem(orderItemService.findOrderItemWithId(edit).getIdOrderItem());
 		orderItem.setProduct(orderItemService.findOrderItemWithId(edit).getProduct());
 		orderItem.setUser(orderItemService.findOrderItemWithId(edit).getUser());
+
 		orderItemService.saveOrderItemWithId(orderItem);
 		return "redirect:/cart?edit=0&remove=0";
 	}
 	
 	@GetMapping("/orders")
 	public String displayOrders(Model model, Principal user) {
-		String username = user.getName();
-		List<Order> orders = orderService.findOrdersFromUser(username);
-
-		model.addAttribute("orders", orders);
-		model.addAttribute("userName", username);
+		model.addAttribute("orders", orderService.findOrdersFromUser(user.getName()));
+		model.addAttribute("userName", user.getName());
 		return "order";
 	}
 
@@ -110,21 +122,31 @@ public class OrderController {
 	@PostMapping("/orders")
 	public String saveOrder(Model model, @ModelAttribute("order") Order order, Principal user) {
 		String username = user.getName();
+		orderService.saveOrder(getOrderInProgress(order, user));
+
+		List<OrderItem> orderItemes = orderItemService.findProductsInCart(username);
+		orderItemes.forEach(oI -> oI.setOrder(order));
+
+		orderService.saveOrder(getPlacedOrder(order, orderItemes));
+		orderItemService.saveOrderItemList(orderItemes);
+
+		return "redirect:/orders";
+	}
+
+	private Order getOrderInProgress(Order order, Principal user) {
 		order.setDateOfOrder(
 				java.util.Date.from((LocalDate.now()).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 		order.setUser(userService.findUserByName(user.getName()));
 		order.setStatus(statusService.findStatus(1));
-		orderService.saveOrder(order);
+		return order;
+	}
 
-		List<OrderItem> orderItemes = orderItemService.findProductsInCart(username);
-		orderItemes.forEach(oI -> oI.setOrder(order));
+	private Order getPlacedOrder(Order order, List<OrderItem> orderItemes) {
 		order.setOrderItems(orderItemes);
 		double totalPrice = orderItemes.stream().mapToDouble(oI -> oI.getProductPrice()).sum();
 		order.setTotalCost(totalPrice);
 		order.setStatus(statusService.findStatus(2));
-		orderService.saveOrder(order);
-		orderItemService.saveOrderItemList(orderItemes);
-		return "redirect:/orders";
+		return order;
 	}
 
 }
