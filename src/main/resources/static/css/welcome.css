@@ -60,6 +60,23 @@ ul {
 	float: right;
 	padding: 0px 0px 5px 15px;
 }
+		/*** alert message ***/
+#alert_msg {
+	background-color: #333333;
+	border: 2px solid #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	border-radius: 5px;
+	color: #f72525;
+	display: block;
+	float:left;
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 5px;
+	text-shadow: 3px 2px #202020;
+}
+		/*** end alert message ***/
 		/*** admin container ***/
 #btn_admin, #btn_admin:visited {
 	border: 2px solid white;

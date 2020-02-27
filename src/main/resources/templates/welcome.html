@@ -13,7 +13,7 @@
 	                	<div id="login_container">
 	                		<div th:if="${userName} == null">
 	                			<a id="btn_login_register" th:href="@{/login}">Login</a>
-								<a id="btn_login_register" th:href="@{/register/form}">Register</a>
+								<a id="btn_login_register" th:href="@{/user/form}">Register</a>
 	                		</div>
 	                		<div th:if="${userName} != null">
 	                			<p>Logged in as: <b><span th:text="${userName}"></span></b></p>
@@ -21,7 +21,7 @@
 								<a id="btn_login_register" th:href="@{|/cart?edit=0&remove=0|}">View Cart</a>
 	                		</div>
 							<div>
-								<img th:if="${userName} != null" th:src="@{/images/logo/{thumb}.png(thumb=${logo})}" th:alt="${logo}">
+								<a th:href="@{|/user/settings|}"><img th:if="${userName} != null" th:src="@{/images/logo/{thumb}.png(thumb=${logo})}" th:alt="${logo}"></a>
 							</div>
 						</div>
 						
@@ -36,6 +36,10 @@
 						
 						<div id="admin_container" th:if="${userName} == admin">
 							<a id="btn_admin" href="/admin">Admin panel</a>
+						</div>
+						
+						<div th:if="${message}" id="alert_msg" class="alert alert-success" role="alert">
+							<p th:text="${message}">success message</p>
 						</div>
 						
 	                </div>
