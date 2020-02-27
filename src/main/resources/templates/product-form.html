@@ -7,11 +7,18 @@
 	</head>
 	<body>
 		<main id="main">
+			<header id="header">
+				<nav id="nav">
+					<ul>
+						<li th:onclick="|location.href='@{/admin}'|">Cancel</li>
+					</ul>
+				</nav>
+			</header>
+		
 			<div id="content">
 				<div id="product_form">
+					<p th:text="${title}"></p>
 					<form action="#" th:action="@{/admin/product/{id}(id=${product.idProduct})}" th:object="${product}" method="post">
-						<p th:if="*{idProduct} != 0"><big th:text="${title}"></big></p>
-						<p th:if="*{idProduct} == 0"><big th:text="${title}"></big></p>
 						<table>
 							<tr th:if="*{idProduct} != 0">
 								<td><label>ID:</label></td>

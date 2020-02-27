@@ -29,18 +29,78 @@ body {
 }
 /* end general CSS */
 
+/* header CSS */
+#header {
+	border-bottom: 1px solid #202020;
+	float: left;
+	height: 40px;  
+}
+
+#header, #nav {
+ 	background-color: #5C5C5C;
+	width: 100%;
+}
+
+#nav ul {
+	list_style: none;
+}
+
+#nav ul li{
+	background-color: #333333;
+	border-left: 1px solid #202020;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	color: white;
+	display: block; 
+	float: left;
+	height: 50px; 
+	line-height: 40px;
+	position: relative;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+	width: 100%;
+}
+
+#nav ul li:hover {
+	color: rgb(26, 170, 218);
+	cursor: pointer;
+	background-color: #202020;
+}
+/* end header CSS */
+
 /* content CSS */
-form {
+#content{
+	float: left;
+}
+
+p {
+	color: white;
+	font-size: xx-large;
+	margin-top: 20px;
+	margin-left: 480px;
+	text-align: center;
+	text-shadow: 3px 2px #202020;
+}
+
+#content form {
+	background-color: white;
 	border: 2px solid #333333;
 	border-radius: 8px;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 	float: left;
+	margin-top: 20px;
 	margin-left: 400px;
-	margin-top: 50px;
-	padding: 20px 0px 20px 50px;
-	width: 35%
+	width: 70%
 }
 
-input[type=text] {
+#content table {
+	float: left;
+	margin-left: 30px;
+	padding: 10px 20px;
+}
+
+#content input[type=text] {
   border: 2px solid #333333;
   border-radius: 8px;
   padding: 12px 20px;
@@ -48,13 +108,13 @@ input[type=text] {
   width: 100%;
 }
 
-input[type=text]:focus {
+#content input[type=text]:focus {
   background-color: #333333;
   border: 3px solid #202020;
   color: white;
 }
 
-input[type=number] {
+#content input[type=number] {
   border: 2px solid #333333;
   border-radius: 8px;
   padding: 12px 20px;
@@ -62,13 +122,13 @@ input[type=number] {
   width: 100%;
 }
 
-input[type=number]:focus {
+#content input[type=number]:focus {
   background-color: #333333;
   border: 3px solid #202020;
   color: white;
 }
 
-input[type=date] {
+#content input[type=date] {
   border: 2px solid #333333;
   border-radius: 8px;
   padding: 12px 20px;
@@ -76,17 +136,13 @@ input[type=date] {
   width: 100%;
 }
 
-input[type=date]:focus {
+#content input[type=date]:focus {
   background-color: #333333;
   border: 3px solid #202020;
   color: white;
 }
 
-label {
-	color: white;
-}
-
-.btn, .btn:visited {
+#content .btn, .btn:visited {
 	background-color: white;
 	border-radius: 5px;
 	color: black;
@@ -99,7 +155,7 @@ label {
 	margin-left:20px;
 }
 
-.btn:hover, .btn:active {
+#content .btn:hover, .btn:active {
 	background-color: #333333;
 	border: 2px solid #202020;
 	color: white;
