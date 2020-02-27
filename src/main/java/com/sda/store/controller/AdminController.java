@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sda.store.model.Category;
 import com.sda.store.model.Product;
 import com.sda.store.model.Supplier;
+import com.sda.store.service.AddressService;
 import com.sda.store.service.CategoryService;
+import com.sda.store.service.OrderItemService;
 import com.sda.store.service.OrderService;
 import com.sda.store.service.ProductService;
 import com.sda.store.service.SupplierService;
@@ -39,7 +41,13 @@ public class AdminController {
 	private UserService userService;
 
 	@Autowired
+	private AddressService addressService;
+
+	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private OrderItemService orderItemService;
 
 	@Autowired
 	private SupplierService supplierService;
@@ -161,7 +169,7 @@ public class AdminController {
 	@GetMapping("/delete/user")
 	public String deleteUser(@RequestParam("id") String username, RedirectAttributes rdAttr) {
 		String redirect = "redirect:/admin/list?type=user";
-		String redirectMessage = "User " + username + " deleted!";
+		String redirectMessage = "User " + username + " & associated adress, orders, products in cart deleted!";
 		userService.deleteUserWithID(username);
 		rdAttr.addFlashAttribute("message", redirectMessage);
 		return redirect;

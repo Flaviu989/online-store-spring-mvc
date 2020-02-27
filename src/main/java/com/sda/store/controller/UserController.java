@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sda.store.model.Address;
 import com.sda.store.model.User;
+import com.sda.store.service.AddressService;
 import com.sda.store.service.UserService;
 
-@RequestMapping("/register")
+@RequestMapping("/user")
 @Controller
 public class UserController implements WebMvcConfigurer {
 
@@ -24,24 +27,34 @@ public class UserController implements WebMvcConfigurer {
 	private UserService userService;
 
 	@Autowired
+	private AddressService addressService;
+
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/form")
 	public String registerForm(Model model) {
 		model.addAttribute("user", new User());
-		return "register";
+		model.addAttribute("address", new Address());
+		return "user-form";
 	}
 
-	@PostMapping("/submit")
-	public String registerSubmit(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+	@PostMapping("/register")
+	public String registerSubmit(@Valid @ModelAttribute("user") User user,
+			@ModelAttribute("address") Address address, RedirectAttributes rdAttr, BindingResult bindingResult) {
+		String redirectMessage = "Registration successful. Please login " + user.getUsername() + "!";
 		if (bindingResult.hasErrors()) {
-			return "register";
+			return "user-form";
 		}
 		user.setAdmin(false);
+		user.setAddress(address);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		if (user.getLogo().equals(""))
 			user.setLogo("default");
+
+		addressService.saveAddress(address);
 		userService.saveUser(user);
+		rdAttr.addFlashAttribute("message", redirectMessage);
 		return "redirect:/";
 	}
 }
