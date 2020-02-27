@@ -1,8 +1,7 @@
 package com.sda.store.controller;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -134,8 +133,7 @@ public class OrderController {
 	}
 
 	private Order getOrderInProgress(Order order, Principal user) {
-		order.setDateOfOrder(
-				java.util.Date.from((LocalDate.now()).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+		order.setDateOfOrder(new Date());
 		order.setUser(userService.findUserByName(user.getName()));
 		order.setStatus(statusService.findStatus(1));
 		return order;

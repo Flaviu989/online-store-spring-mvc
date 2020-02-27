@@ -1,7 +1,6 @@
 package com.sda.store.controller;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -122,7 +121,7 @@ public class AdminController {
 	public String displayProductAddForm(Model model, @RequestParam("id") int id) {
 		String title = "Add Product Form";
 		Product product = new Product();
-		Date today = java.util.Date.from((LocalDate.now()).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+		Date today = new Date();
 		product.setDateAdded(today);
 		List<Category> allSubCategories = categoryService.findSubCategory();
 		List<Supplier> allSuppliers = supplierService.findAllSuppliers();

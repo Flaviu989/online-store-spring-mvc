@@ -36,6 +36,7 @@ public class UserController implements WebMvcConfigurer {
 	public String registerForm(Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("address", new Address());
+		model.addAttribute("title", "Register user");
 		return "user-form";
 	}
 
