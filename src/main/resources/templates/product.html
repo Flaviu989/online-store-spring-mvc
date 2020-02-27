@@ -11,7 +11,7 @@
 				<nav id="nav">
 					<ul>
 						<li th:onclick="|location.href='@{/}'|">Back to Homepage</li>
-						<li th:onclick="|location.href='@{/list/*{category.idCategory}/nameOrder/0}'|">Back to Categories</li>
+						<li th:onclick="|location.href='@{/list/{id}/nameOrder/0(id=${product.category.idCategory})}'|">Back to Categories</li>
 						<li th:onclick="|location.href='@{/cart?edit=0&remove=0}'|">Go to Cart</li>
 					</ul>
 				</nav>
