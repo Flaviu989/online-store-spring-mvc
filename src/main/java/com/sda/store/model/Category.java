@@ -3,6 +3,7 @@ package com.sda.store.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,10 +24,10 @@ public class Category {
 	@JoinColumn(name = "idSuperCategory")
 	private Category superCategory;
 
-	@OneToMany(mappedBy = "superCategory")
+	@OneToMany(mappedBy = "superCategory", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Category> subCategories = new ArrayList<Category>();
 
-	@OneToMany(mappedBy = "category")
+	@OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Product> products = new ArrayList<Product>();
 
 	public int getIdCategory() {

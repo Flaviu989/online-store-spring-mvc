@@ -3,6 +3,7 @@ package com.sda.store.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Order {
 	@JoinColumn(name = "idUser")
 	private User user;
 
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<OrderItem> orderItems;
 
 	@ManyToOne
