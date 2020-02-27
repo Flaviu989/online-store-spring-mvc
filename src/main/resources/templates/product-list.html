@@ -37,13 +37,13 @@
 						<tr th:each="product: ${products}">
 							<th></th>
 							<td>
-								<a class="btn_img" th:href="|/product/${product.idProduct}|">
+								<a class="btn_img" th:href="@{|/product/${product.idProduct}|}">
 									<img th:if="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=${product.thumbnail})}" th:alt="${product.thumbnail}">
 									<img th:unless="${product.thumbnail} != null" th:src="@{/images/product_thumbnail/default.jpg}" alt="Default image">
 								</a>
 							</td>
 							<td th:text="${product.name}"></td>
-							<td><a class="btn" th:href="|/product/${product.idProduct}|">See details</a></td>
+							<td><a class="btn" th:href="@{|/product/${product.idProduct}|}">See details</a></td>
 						</tr>
 					</tbody>
 				</table>
