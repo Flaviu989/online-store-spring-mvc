@@ -21,7 +21,9 @@
 								<a id="btn_login_register" th:href="@{|/cart?edit=0&remove=0|}">View Cart</a>
 	                		</div>
 							<div>
-								<a th:href="@{|/user/settings|}"><img th:if="${userName} != null" th:src="@{/images/logo/{thumb}.png(thumb=${logo})}" th:alt="${logo}"></a>
+								<a th:href="@{|/user/settings?view=none|}">
+									<img th:if="${userName} != null" th:src="@{/images/logo/{thumb}.png(thumb=${logo})}" th:alt="${logo}">
+								</a>
 							</div>
 						</div>
 						

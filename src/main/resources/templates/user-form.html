@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<html>
 	<head>
 		<meta charset="UTF-8">
 		<title th:text="${title}"></title>
@@ -18,9 +17,9 @@
 			
 			<div id="content">
 				<p th:text="${title}"></p>
-				<form th:action="@{/user/register}" th:object="${user}" method="post">
+				<form th:action="@{/user/register}" method="post">
 					<table>
-						<tr>
+						<tr th:object="${user}">
 							<th><label th:for="*{username}">Username:</label></th>
 							<td><input type="text" th:field="*{username}" placeholder="Type a username" /></td>
 						</tr>
@@ -49,22 +48,22 @@
 							<td th:if="${#fields.hasErrors('logo')}" th:errors="*{logo}">Image Name Error</td>
 						</tr>
 					</table>
-					<table>
+					<table th:object="${address}">
 						<tr>
-							<th><label th:for="${address.street}">Street:</label>
-							<td><input type="text" th:field="${address.street}" placeholder="Str. Name, nr. 00" /></td>
+							<th><label th:for="*{street}">Street:</label>
+							<td><input type="text" th:field="*{street}" placeholder="Str. Name, nr. 00" /></td>
 						</tr>
 						<tr>
-							<th><label th:for="${address.city}">City:</label>
-							<td><input type="text" th:field="${address.city}" placeholder="City Name" /></td>
+							<th><label th:for="*{city}">City:</label>
+							<td><input type="text" th:field="*{city}" placeholder="City Name" /></td>
 						</tr>
 						<tr>
-							<th><label th:for="${address.country}">Country:</label>
-							<td><input type="text" th:field="${address.country}" placeholder="Country Name" /></td>
+							<th><label th:for="*{country}">Country:</label>
+							<td><input type="text" th:field="*{country}" placeholder="Country Name" /></td>
 						</tr>
 						<tr>
-							<th><label th:for="${address.zip}">Zip code:</label>
-							<td><input type="text" th:field="${address.zip}" placeholder="000000" /></td>
+							<th><label th:for="*{zip}">Zip code:</label>
+							<td><input type="text" th:field="*{zip}" placeholder="000000" /></td>
 						</tr>
 					</table>
 					<input class="btn" type="submit" value="Save" />
