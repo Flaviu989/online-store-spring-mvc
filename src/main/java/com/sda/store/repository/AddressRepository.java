@@ -8,4 +8,6 @@ import com.sda.store.model.Address;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
 
+	Address findByUserUsername(String username);
+
 }

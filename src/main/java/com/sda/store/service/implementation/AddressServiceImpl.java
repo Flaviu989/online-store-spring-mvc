@@ -14,8 +14,14 @@ public class AddressServiceImpl implements AddressService {
 	private AddressRepository addressRepository;
 
 	@Override
+	public Address findAddressOfUser(String username) {
+		return addressRepository.findByUserUsername(username);
+	}
+
+	@Override
 	public void saveAddress(Address address) {
 		addressRepository.save(address);
 	}
+
 
 }
