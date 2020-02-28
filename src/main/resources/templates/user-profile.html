@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${title}"></title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/user-profile.css}"/>
+	</head>
+	<body>
+		<main id="main">
+			<div id="content">
+				<div id="side_menu">
+					<ul>
+						<li th:onclick="|location.href='@{/}'|">Homepage</li>
+						<li th:onclick="|location.href='@{/cart?edit=0&remove=0}'|">Cart</li>
+						<li th:onclick="|location.href='@{/orders}'|">Orders</li>
+						<li th:onclick="|location.href='@{/user/settings?view=edituser}'|">General settings</li>
+						<li th:onclick="|location.href='@{/user/settings?view=editaddress}'|">Change address</li>
+					</ul>
+				</div>
+				
+				<div id="profile" th:if="${userName} != null">
+					<div id="user" th:object="${user}">
+						<div id="profile_img">
+							<img th:if="*{logo} != null" th:src="@{|/images/logo/{thumb}.png|(thumb=*{logo})}" th:alt="*{logo}">
+							<img th:if="*{logo} == null" th:src="@{|/images/logo/default.png|}" th:alt="default">
+						</div>
+						<p id="username" th:text="|User: ${userName} - *{firstName} *{lastName}|"></p>
+					</div>
+					<p id="address" th:object="${address}" th:text="|Address - (Street: *{street}, *{city}, *{country})|">
+				</div>
+				
+				<div th:if="${message}" id="alert_msg" class="alert alert-success" role="alert">
+					<p th:text="${message}">success message</p>
+				</div>
+				
+				<div id="form" th:unless="${view} == none">
+					<form th:action="@{|/user/settings?view=none|}" method="post">
+						<table th:object="${user}" th:if="${view} == edituser">
+							<tr>
+								<th><label th:for="*{username}">Username:</label></th>
+								<td>
+									<input type="hidden" th:field="*{username}" />
+									<b><span th:text="*{username}"></span></b>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="hidden" th:field="${user.password}" /></td>
+							</tr>
+							<tr>
+								<th><label th:for="*{firstName}">First Name:</label></th>
+								<td><input type="text" th:field="*{firstName}" placeholder="Type your name"/></td>
+								<td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
+							</tr>
+							<tr>
+								<th><label th:for="*{lastName}">Last Name:</label></th>
+								<td><input type="text" th:field="*{lastName}" placeholder="Type your last name"/></td>
+								<td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</td>
+							</tr>
+							<tr>
+								<th><label th:for="*{login}">Email:</label></th>
+								<td><input type="text" th:field="*{login}" placeholder="example@mail.com"/></td>
+								<td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Email Error</td>
+							</tr>
+							<tr>
+								<th><label th:for="*{logo}">Image:</label></th>
+								<td><input type="text" th:field="*{logo}" placeholder="type image name"/></td>
+								<td th:if="${#fields.hasErrors('logo')}" th:errors="*{logo}">Image Name Error</td>
+							</tr>
+							<tr>
+								<input type="hidden" th:field="${address.street}" />
+								<input type="hidden" th:field="${address.city}" />
+								<input type="hidden" th:field="${address.country}" />
+								<input type="hidden" th:field="${address.zip}" />
+							</tr>
+						</table>
+						<table th:object="${address}" th:if="${view} == editaddress">
+							<tr>
+								<td colspan="2">
+									<input type="hidden" th:field="${user.username}" />
+									<input type="hidden" th:field="${user.password}" />
+									<input type="hidden" th:field="${user.firstName}" />
+									<input type="hidden" th:field="${user.lastName}" />
+									<input type="hidden" th:field="${user.login}" />
+									<input type="hidden" th:field="${user.logo}" />
+								</td>
+							</tr>
+							<tr>
+								<th><label th:for="*{street}">Street:</label>
+								<td><input type="text" th:field="*{street}" placeholder="Str. Name, nr. 00" /></td>
+							</tr>
+							<tr>
+								<th><label th:for="*{city}">City:</label>
+								<td><input type="text" th:field="*{city}" placeholder="City Name" /></td>
+							</tr>
+							<tr>
+								<th><label th:for="*{country}">Country:</label>
+								<td><input type="text" th:field="*{country}" placeholder="Country Name" /></td>
+							</tr>
+							<tr>
+								<th><label th:for="*{zip}">Zip code:</label>
+								<td><input type="text" th:field="*{zip}" placeholder="000000" /></td>
+							</tr>
+						</table>
+						<input class="btn" type="submit" value="Save" />
+						<a class="btn" th:href="@{|/user/settings?view=none|}">Cancel</a>
+					</form>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
