@@ -141,7 +141,7 @@ public class OrderController {
 
 	private Order getPlacedOrder(Order order, List<OrderItem> orderItemes) {
 		order.setOrderItems(orderItemes);
-		double totalPrice = orderItemes.stream().mapToDouble(oI -> oI.getProductPrice()).sum();
+		double totalPrice = orderItemes.stream().mapToDouble(oI -> oI.getProductPrice() * oI.getQuantity()).sum();
 		order.setTotalCost(totalPrice);
 		order.setStatus(statusService.findStatus(2));
 		return order;
