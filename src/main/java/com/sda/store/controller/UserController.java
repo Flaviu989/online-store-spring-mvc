@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sda.store.model.Address;
@@ -24,7 +23,7 @@ import com.sda.store.service.UserService;
 
 @RequestMapping("/user")
 @Controller
-public class UserController implements WebMvcConfigurer {
+public class UserController {
 
 	@Autowired
 	private UserService userService;
@@ -46,15 +45,16 @@ public class UserController implements WebMvcConfigurer {
 	@PostMapping("/register")
 	public String registerSubmit(@Valid @ModelAttribute("user") User user,
 			@ModelAttribute("address") Address address, RedirectAttributes rdAttr, BindingResult bindingResult) {
-		String redirectMessage = "Registration successful. Please login " + user.getUsername() + "!";
-		if (bindingResult.hasErrors()) {
+
+		if (bindingResult.hasErrors())
 			return "user-form";
-		}
+
 		user.setAdmin(false);
 		user.setAddress(address);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		if (user.getLogo().equals(""))
 			user.setLogo("default");
+		String redirectMessage = "Registration successful. Please login " + user.getUsername() + "!";
 
 		addressService.saveAddress(address);
 		userService.saveUser(user);

@@ -18,34 +18,35 @@
 			<div id="content">
 				<p th:text="${title}"></p>
 				<form th:action="@{/user/register}" method="post">
-					<table>
-						<tr th:object="${user}">
+					<table th:object="${user}">
+						<tr>
 							<th><label th:for="*{username}">Username:</label></th>
 							<td><input type="text" th:field="*{username}" placeholder="Type a username" /></td>
+							<td class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
 						</tr>
 						<tr>
 							<th><label th:for="*{password}">Password:</label></th>
 							<td><input type="password" th:field="*{password}" /></td>
+							<td class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
 						</tr>
 						<tr>
 							<th><label th:for="*{firstName}">First Name:</label></th>
 							<td><input type="text" th:field="*{firstName}" placeholder="Type your name"/></td>
-							<td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
+							<td class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></td>
 						</tr>
 						<tr>
 							<th><label th:for="*{lastName}">Last Name:</label></th>
 							<td><input type="text" th:field="*{lastName}" placeholder="Type your last name"/></td>
-							<td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</td>
+							<td class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></td>
 						</tr>
 						<tr>
 							<th><label th:for="*{login}">Email:</label></th>
 							<td><input type="text" th:field="*{login}" placeholder="example@mail.com"/></td>
-							<td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Email Error</td>
+							<td class="error" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></td>
 						</tr>
 						<tr>
 							<th><label th:for="*{logo}">Image:</label></th>
 							<td><input type="text" th:field="*{logo}" placeholder="type image name"/></td>
-							<td th:if="${#fields.hasErrors('logo')}" th:errors="*{logo}">Image Name Error</td>
 						</tr>
 					</table>
 					<table th:object="${address}">
