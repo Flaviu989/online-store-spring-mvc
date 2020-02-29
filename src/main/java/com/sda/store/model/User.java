@@ -10,15 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.sda.store.validator.Password;
 
 @Entity
 public class User {
 
 	@Id
 	@Column(length = 45)
+	@NotBlank
+	@Size(min = 4, max = 16)
 	private String username;
+	@Password
 	private String password;
 	@NotBlank
 	@Size(min = 2, max = 30)
@@ -26,10 +32,10 @@ public class User {
 	@NotBlank
 	@Size(min = 2, max = 30)
 	private String lastName;
+	@Email
 	@NotBlank
 	private String login;
 	@Column(columnDefinition = "varchar(45) default 'default'")
-	@NotBlank
 	private String logo;
 	private boolean admin;
 
