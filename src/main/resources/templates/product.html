@@ -26,14 +26,12 @@
 						</th>
 					</tr>
 					<tr> 
-						<th></th>
 						<td  colspan="2">
 							<img th:id="*{thumbnail} != null" th:src="@{/images/product_thumbnail/{thumb}.jpg(thumb=*{thumbnail})}" th:alt="*{thumbnail}">
 							<img th:unless="*{thumbnail} != null" th:src="@{/images/product_thumbnail/default.jpg}" alt="Default image">
 						</td>
 					</tr>
 					<tr>
-						<th></th>
 						<td id="title"><span th:text="*{name}"></span></td>
 						<td id="price">
 							<div>
@@ -45,11 +43,9 @@
 						</td>
 					</tr>
 					<tr>
-						<th></th>
 						<td id="description" colspan="2" th:text="|Description: *{description}|"></td>
 					</tr>
 					<tr>
-						<th></th>
 						<td id="supplier" colspan="2" th:text="|Supplied by: *{supplier.name}|"></td>
 					</tr>
 				</table>

@@ -90,6 +90,7 @@ body {
 #product_table th {
 	background-color: #333333;
 	border-bottom: 1px solid #ddd;
+	border-radius: 10px 10px 0px 0px;
 	color: #f72525;
 	text-shadow: 3px 2px #202020;
 }

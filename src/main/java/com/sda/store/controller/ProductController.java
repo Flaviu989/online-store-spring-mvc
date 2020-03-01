@@ -87,7 +87,7 @@ public class ProductController {
 		if (id == 0) {
 			categoryName = "All products";
 		} else
-			categoryName = categoryService.findCategoryById(id);
+			categoryName = categoryService.findNameOfCategoryById(id);
 		return categoryName;
 	}
 
