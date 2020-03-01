@@ -21,8 +21,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public String findCategoryById(int id) {
+	public String findNameOfCategoryById(int id) {
 		return categoryRepository.findByIdCategory(id).getName();
+	}
+
+	@Override
+	public Category findCategoryById(int id) {
+		return categoryRepository.findByIdCategory(id);
 	}
 
 	@Override
@@ -33,5 +38,20 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> findSubCategory() {
 		return categoryRepository.findBysubCategoriesIsEmptyOrderByNameAscIdCategoryAsc();
+	}
+
+	@Override
+	public List<Category> possibleSuperCategories() {
+		return categoryRepository.findPossibleSuperCategories();
+	}
+
+	@Override
+	public void save(Category category) {
+		categoryRepository.save(category);
+	}
+
+	@Override
+	public void deleteProductWithId(int id) {
+		categoryRepository.deleteById(id);
 	}
 }
