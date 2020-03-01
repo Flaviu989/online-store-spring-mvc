@@ -42,8 +42,6 @@ public class OrderController {
 	@Autowired
 	private StatusService statusService;
 
-	private int totalPrice;
-
 	@PostMapping("/product/{id}")
 	public String saveOrderItem(Model model, @PathVariable("id") int id,
 			@ModelAttribute("orderItem") OrderItem orderItem, Principal user, RedirectAttributes rdAttr) {

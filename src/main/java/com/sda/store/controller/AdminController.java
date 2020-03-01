@@ -1,12 +1,15 @@
 package com.sda.store.controller;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sda.store.model.Address;
 import com.sda.store.model.Category;
 import com.sda.store.model.Product;
 import com.sda.store.model.Supplier;
+import com.sda.store.model.User;
 import com.sda.store.service.AddressService;
 import com.sda.store.service.CategoryService;
 import com.sda.store.service.OrderItemService;
@@ -50,6 +55,9 @@ public class AdminController {
 
 	@Autowired
 	private SupplierService supplierService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("")
 	public String displayAdminPanel(Model model) {
@@ -137,7 +145,6 @@ public class AdminController {
 	public String saveProductWithId(Model model, @PathVariable("id") int id,
 			@ModelAttribute("product") Product product, RedirectAttributes rdAttr) {
 		String title = "Admin Panel";
-		String tableDdisplay = "none";
 		if (product.getThumbnail().trim().equals(""))
 			product.setThumbnail("default");
 		if (product.getName().trim().equals(""))
@@ -151,7 +158,6 @@ public class AdminController {
 				+ ") added or updated.";
 
 		model.addAttribute("title", title);
-		model.addAttribute("table_display", tableDdisplay);
 		rdAttr.addFlashAttribute("message", redirectMessage);
 		return redirect;
 	}
@@ -165,11 +171,100 @@ public class AdminController {
 		return redirect;
 	}
 	
+	@GetMapping("/editCategory")
+	public String displayCategoryEditForm(Model model, @RequestParam("id") int id) {
+		String title = "Edit Category Form";
+
+		Category category = categoryService.findCategoryById(id);
+		List<Category> possibleSuperCategories = categoryService.possibleSuperCategories();
+
+		model.addAttribute("category", category);
+		model.addAttribute("possibleSuperCategories", possibleSuperCategories);
+		model.addAttribute("title", title);
+		model.addAttribute("null", null);
+		return "category-form";
+	}
+
+	@GetMapping("/addCategory")
+	public String displayCategoryAddForm(Model model, @RequestParam("id") int id) {
+		String title = "Add Category Form";
+		Category category = new Category();
+		List<Category> possibleSuperCategories = categoryService.possibleSuperCategories();
+
+		model.addAttribute("category", category);
+		model.addAttribute("possibleSuperCategories", possibleSuperCategories);
+		model.addAttribute("title", title);
+		model.addAttribute("null", null);
+		return "category-form";
+	}
+
+	@PostMapping("/category/{id}")
+	public String saveCategoryWithId(Model model, @PathVariable("id") int id,
+			@ModelAttribute("category") Category category, RedirectAttributes rdAttr) {
+		String title = "Admin Panel";
+
+		categoryService.save(category);
+		String redirect = "redirect:/admin/list?type=category";
+		String redirectMessage = "Category " + category.getName() + " (ID: " + category.getIdCategory()
+				+ ") added or updated.";
+
+		model.addAttribute("title", title);
+		rdAttr.addFlashAttribute("message", redirectMessage);
+		return redirect;
+	}
+
+	@GetMapping("/delete/category")
+	public String deleteCategory(@RequestParam("id") int id, RedirectAttributes rdAttr) {
+		String redirect = "redirect:/admin/list?type=category";
+		String redirectMessage = "Category with ID: " + id + " deleted!";
+		categoryService.deleteProductWithId(id);
+		rdAttr.addFlashAttribute("message", redirectMessage);
+		return redirect;
+	}
+
 	@GetMapping("/delete/user")
 	public String deleteUser(@RequestParam("id") String username, RedirectAttributes rdAttr) {
 		String redirect = "redirect:/admin/list?type=user";
 		String redirectMessage = "User " + username + " & associated adress, orders, products in cart deleted!";
 		userService.deleteUserWithID(username);
+		rdAttr.addFlashAttribute("message", redirectMessage);
+		return redirect;
+	}
+
+	@GetMapping("/editUser")
+	public String displayUserEditForm(Model model, @RequestParam("id") String username) {
+		model.addAttribute("path", "/admin/editUser?id=" + username);
+		model.addAttribute("user", userService.findUserByName(username));
+		model.addAttribute("address", userService.findUserByName(username).getAddress());
+		model.addAttribute("title", "Update " + username + " user");
+		return "user-form";
+	}
+
+	@PostMapping("/editUser")
+	public String saveUserProfile(@RequestParam("id") String username, @Valid @ModelAttribute("user") User user,
+			@ModelAttribute("address") Address address, BindingResult bindingResult, RedirectAttributes rdAttr) {
+		String redirect = "redirect:/admin/list?type=user";
+		String redirectMessage = username + "'s profile updated!";
+
+		if (bindingResult.hasErrors())
+			return "user-form";
+
+		user.setUsername(userService.findUserByName(username).getUsername());
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setAddress(userService.findUserByName(username).getAddress());
+		user.setAdmin(userService.findUserByName(username).isAdmin());
+		if (!(user.equals(userService.findUserByName(username))))
+			userService.saveUser(user);
+
+		address.setUser(userService.findUserByName(username));
+		address.setIdAddress(addressService.findAddressOfUser(username).getIdAddress());
+		if (!(address.equals(addressService.findAddressOfUser(username))))
+			addressService.saveAddress(address);
+
+		if ((user.equals(userService.findUserByName(username)))
+				&& (address.equals(addressService.findAddressOfUser(username))))
+			redirectMessage = "No changes were made!";
+
 		rdAttr.addFlashAttribute("message", redirectMessage);
 		return redirect;
 	}
