@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/admin-panel.css}"/>
 	</head>
 	<body>
-		<main id="main">
+		<div id="main">
 			<header id="header">
 				<nav id="nav">
 					<ul>
@@ -34,6 +34,7 @@
 								<th th:unless="${table_display} == order">Name</th>
 								<th th:if="${table_display} == user">Role</th>
 								<th th:if="${table_display} == order">Address</th>
+								<!-- <th th:if="${table_display} == category">Super Category</th> -->
 								<th th:text="|Edit ${table_display}|"></th>
 								<th th:text="|Delete ${table_display}|"></th>
 							</tr>
@@ -45,11 +46,12 @@
 								<td><a th:href="@{/admin/editProduct?id={idP}(idP=${product.idProduct})}"  class="btn_edit">Edit</a></td>
 								<td><a th:href="@{/admin/delete/product?id={idP}(idP=${product.idProduct})}" class="btn_delete" >Delete</a></td>
 							</tr>
-							<tr th:if="${table_display} == category" th:each="category: ${list}">
+							<tr th:if="${table_display} == category" th:each="category: ${list}" th:with="parent=${category.superCategory}">
 								<th th:text="${category.idCategory}"></th>
 								<td th:text="${category.name}"></td>
-								<td><a class="btn_edit">Edit</a></td>
-								<td><a class="btn_delete">Delete</a></td>
+								<!-- <td th:text="${parent.name}"></td> -->
+								<td><a th:href="@{/admin/editCategory?id={idC}(idC=${category.idCategory})}" class="btn_edit">Edit</a></td>
+								<td><a th:href="@{/admin/delete/category?id={idC}(idC=${category.idCategory})}" class="btn_delete">Delete</a></td>
 							</tr>
 							<tr th:if="${table_display} == user" th:each="user: ${list}">
 								<th th:text="${user.username}"></th>
@@ -69,6 +71,6 @@
 					</table>
 				</div>
 			</div>
-		</main>
+		</div>
 	</body>
 </html>

@@ -2,8 +2,6 @@
 
 /* style reset */
 html, body {
-	width: 100%;
-	height: 100%;
 	margin: 0;
 	padding: 0;
 }
@@ -16,12 +14,12 @@ html, body {
 
 /* general CSS */
 body {
+	background-color: #5C5C5C;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 #main {
 	background-color: #5C5C5C;
-	height: 100%; 
 	width: 100%;
 }
 
@@ -34,7 +32,8 @@ ul {
 #header {
 	border-bottom: 1px solid #202020;
 	float: left;
-	height: 10%;  
+	height: 10%; 
+	margin-bottom: 10px;
 }
 
 #header, #nav {
@@ -51,11 +50,9 @@ ul {
 	border-left: 1px solid #202020;
 	border-bottom: 1px solid rgba(0,0,0,.2);
 	color: white;
-	display: block; 
 	float: left;
 	height: 63px; 
 	line-height: 50px;
-	position: relative;
 	text-align: center;
 	text-shadow: 3px 2px #202020;
 	width: 14.15%;
@@ -77,8 +74,7 @@ ul {
 		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 	border-radius: 5px;
 	color: #f72525;
-	display: block;
-	float:left;
+	float: left;
 	margin-left: 400px;
 	margin-top: 10px;
 	padding: 20px;
