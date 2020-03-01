@@ -176,4 +176,20 @@ p {
 		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
 	color: white;
 }
+
+#container > #alert_msg {
+	background-color: #333333;
+	border: 2px solid #202020;
+	box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+		-moz-box-shadow: 3px 3px 3px 3px  rgba(0, 0 , 0, .4);
+		-webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0 , 0, .4);
+	border-radius: 5px;
+	color: #f72525;
+	display: block;
+	float:left;
+	margin-left: 200px;
+	margin-top: 10px;
+	padding: 20px;
+	text-shadow: 3px 2px #202020;
+}
 /* end content CSS */

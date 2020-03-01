@@ -36,6 +36,7 @@ public class UserController {
 
 	@GetMapping("/form")
 	public String registerForm(Model model) {
+		model.addAttribute("path", "/user/register");
 		model.addAttribute("user", new User());
 		model.addAttribute("address", new Address());
 		model.addAttribute("title", "Register new user");
@@ -47,8 +48,14 @@ public class UserController {
 			@ModelAttribute("address") Address address, RedirectAttributes rdAttr, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors())
-			return "user-form";
-
+			return "redirect:/user/register";
+		
+		String redirect = checkIfUsernameExists(user);
+		if (redirect.length() > 1) {
+			String redirectMessage = "Username " + user.getUsername() + " already exist!";
+			return redirect;
+		}
+		
 		user.setAdmin(false);
 		user.setAddress(address);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -60,6 +67,18 @@ public class UserController {
 		userService.saveUser(user);
 		rdAttr.addFlashAttribute("message", redirectMessage);
 		return "redirect:/";
+	}
+
+	private String checkIfUsernameExists(User user) {
+		String[] redir = {" "};
+		userService.findAllUsers().stream()
+								  .map(u -> u.getUsername())
+								  .sorted()
+								  .forEach(u -> {
+									if(u.equals(user.getUsername()))
+										redir[0] = "user-form";
+								  });
+		return redir[0];
 	}
 
 	@GetMapping("/settings")

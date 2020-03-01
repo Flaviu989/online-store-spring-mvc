@@ -17,7 +17,7 @@
 			
 			<div id="content">
 				<p th:text="${title}"></p>
-				<form th:action="@{/user/register}" method="post">
+				<form th:action="@{${path}}" method="post">
 					<table th:object="${user}">
 						<tr>
 							<th><label th:for="*{username}">Username:</label></th>
@@ -69,6 +69,9 @@
 					</table>
 					<input class="btn" type="submit" value="Save" />
 				</form>
+				<div th:if="${message}" id="alert_msg" class="alert alert-success" role="alert">
+					<p th:text="${message}">success message</p>
+				</div>
 			</div>
 		</main>
 	</body>
