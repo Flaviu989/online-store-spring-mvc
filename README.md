@@ -12,10 +12,10 @@ Users are able to register and login as well as placing an order by the user.
 * **Login panel** ✔
 * **Admin**: ✔
 	* *Adding categories for products*
-		* category name
-		* subcategory
+		* category name ✔
+		* subcategory ✔
 	* *Cathegory list + edition*
-		* button to edit given category
+		* button to edit given category ✔
 		* button to delete given category ✔
 	* *Product list + edition*
 		* list all the added products ✔
@@ -29,10 +29,10 @@ Users are able to register and login as well as placing an order by the user.
 		* product supplier (dropdown) ✔
 		* category (dropdown) ✔
 	* *User list + edition*
-	    * button to edit given user 
+	    * button to edit given user ✔
 	    * button to delete given user (except admin) ✔
 	* *Order list + edition*
-	    * button to edit given order 
+	    * button to edit given order
 	    * button to delete given order ✔
 * **User**:
 	* *Registration*
@@ -50,7 +50,7 @@ Users are able to register and login as well as placing an order by the user.
 	    * option to orer proucts in the cart -> redirect to user orders ✔
 
 ### Aditional functions
-    * ability to edit user acount (data)
+    * ability to edit user acount (data) ✔
     * overview of the user orders (from user and admin level) ✔
     * an aestatic and functional way of presenting data ✔
-    * pre-validate data collected from user
+    * pre-validate data collected from user ✔
