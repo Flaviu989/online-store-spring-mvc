@@ -4,8 +4,8 @@
 An application that allows adding products to he store through the administration pannel.
 Users are able to register and login as well as placing an order by the user.
 
-* [Application UML](https://gitlab.com/Flaviu989/online-store-spring-mvc/-/raw/master/JDL-Studio%20UML.png)
-* [Database Script](https://gitlab.com/Flaviu989/online-store-spring-mvc/-/blob/master/sda_online_store_schema.sql)
+* [Application UML](https://github.com/Flaviu989/online-store-spring-mvc/blob/master/JDL-Studio%20UML.png)
+* [Database Script](https://github.com/Flaviu989/online-store-spring-mvc/blob/master/sda_online_store_schema.sql)
 
 ## Functionality
 ### Main functions
