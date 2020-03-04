@@ -1,7 +1,7 @@
 # SDA Online Store - Spring MVC
 
 ## Description
-An application that allows adding products to the store through the administration panel. Users are able to register, login as well as add products to cart and place an order.
+An application that allows adding products to the store through the administration panel. Users are able to register, login as well as add products in the cart and place an order.
 
 * [Application UML](https://github.com/Flaviu989/online-store-spring-mvc/blob/master/JDL-Studio%20UML.png)
 * [Database Script](https://github.com/Flaviu989/online-store-spring-mvc/blob/master/sda_online_store_schema.sql)
