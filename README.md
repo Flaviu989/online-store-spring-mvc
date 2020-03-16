@@ -50,7 +50,7 @@ Frameworks used: **Spring MVC and Thymeleaf**
 	    * option to orer proucts in the cart -> redirect to user orders ✔
 
 ### Aditional functions
-    * ability to edit user acount (data) ✔
-    * overview of the user orders (from user and admin level) ✔
-    * an aestatic and functional way of presenting data ✔
-    * pre-validate data collected from user ✔
+* ability to edit user acount (data) ✔
+* overview of the user orders (from user and admin level) ✔
+* an aestatic and functional way of presenting data ✔
+* pre-validate data collected from user ✔
